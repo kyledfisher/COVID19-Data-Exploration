@@ -3,11 +3,18 @@
 # Update data/ directory with newly added csvs from the main CSSE repo located 
 # at https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports.
 #
-
+# Author: Z. Wallace
+# Created: 3.29.20
 
 
 library(magrittr)
 library(xml2)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+
+# Set paths 
+
 
 # Pull in list of daily data. 
 xml.path <- 'https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports'
@@ -23,6 +30,48 @@ dates.list <- lapply(csv.list, function(x) {
     }
 })
 dates.list[sapply(dates.list, is.null)] <- NULL
-dates.list %>% unlist
+dates.list <- dates.list
 
-# Fetch raw data
+# Fetch raw csv data
+raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
+suppress <- lapply(dates.list, function(x, raw.path) {
+    download.file(paste0(raw.path, x), paste0('/Users/zach/Code/COVID19-Data-Exploration/data/',x))
+}, raw.path)
+
+trim<- function(x) return(sub('\\s\\d$', '', x))
+
+# x <- dates.list[[2]]
+data.dt <- lapply(dates.list, function(x) {
+    tmp.dt <- fread(paste0('/Users/zach/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
+    
+    # Fix formatting for first 10 days
+    if (tstrsplit(x, split='\\.', keep=1) < '02-02-2020') {
+        colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
+        tryCatch(
+            tmp.dt$Last_Update <- substr(tmp.dt$Last_Update, 1, 9) %>% 
+                trim %>% 
+                parse_date_time(orders='m/d/y') %>% 
+                substr(., 1, 10),
+            warning = function(w) {
+                message(x)
+            }
+        )
+    } else {
+        # Truncate Last_Update to daily values
+        tmp.dt$Last_Update <- substr(tmp.dt$Last_Update, 1, 10)
+    }
+    
+    return (tmp.dt)
+}) %>% rbindlist(fill=TRUE)
+
+sum(data.dt[data.dt$Country_Region=='US', 'Deaths'], na.rm = TRUE)
+data.dt%>% group_by(c(Country_Region, Deaths))
+
+data.dt[which(data.dt$Deaths %>% is.na), 'Deaths'] <- 0
+melted.dt <- data.dt[which(data.dt$`Country/Region`=='US'),]  %>%
+    melt.data.table(id.vars='Last Update',measure.vars='Deaths', value.name='Deaths')
+
+ggplot(data=melted.dt) + 
+    geom_bar(mapping=aes(`Last Update`))
+sum(melted.dt$Deaths)
+

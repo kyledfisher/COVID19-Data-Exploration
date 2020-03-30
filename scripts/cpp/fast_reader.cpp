@@ -4,7 +4,7 @@
  * Read and parse lines in c++ for performance reasons.
  * readLines in R is somewhat slow.
  * 
- * TODO: actually make this faster.  Oveheard of calling SourceRCpp negates 
+ * TODO: actually make this faster.  Ovehead of calling SourceRCpp negates 
  *       performance benefit :(
  */
 
