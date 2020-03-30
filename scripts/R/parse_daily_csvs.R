@@ -40,43 +40,34 @@ suppress <- lapply(dates.list, function(x, raw.path) {
 }, raw.path)
 
 # trim whitespace and any trailing digits
-trim<- function(x) return(sub('\\s\\d$', '', x))
+#trim<- function(x) return(sub('\\s\\d$', '', x))
+trim<- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
 
 # x <- dates.list[[1]]
 data.dt <- lapply(dates.list, function(x) {
+    
+    # Fix column names and standardize date formats
     tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
     colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
     # Fix date formatting for first 10 days
-    if (tstrsplit(x, split='\\.', keep=1) < '02-02-2020') {
-        tryCatch({
-            tmp.dt$Last_Update <- substr(tmp.dt$Last_Update, 1, 9) %>% 
-                trim %>% 
-                parse_date_time(orders='m/d/y') %>% 
-                substr(., 1, 10)
-            return(tmp.dt)},
-            warning = function(w) {
-                message(paste('Warning!  Check file:', x))
-            },
-            error = function(e) {
-                message(paste('Error!  Check file', x))
-            }
-        )
-    } else {
-        # Truncate Last_Update to daily values
-        tmp.dt$Last_Update <- substr(tmp.dt$Last_Update, 1, 10)
-        return(tmp.dt)
-    }
-    
-    
+    tryCatch({
+        tmp.dt$Last_Update <- tmp.dt$Last_Update %>% 
+            trim %>% 
+            parse_date_time(orders=c('%m/%d/%y','%m/%d/%Y','%Y-%m-%d'))# %>% 
+            #substr(., 1, 10)
+        return(tmp.dt)},
+        warning = function(w) {
+            message(paste('Warning!  Check file:', x))
+        },
+        error = function(e) {
+            message(paste('Error!  Check file', x))
+        }
+    )
 }) %>% rbindlist(fill=TRUE)
 
-us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(max(Deaths)) %>% data.table
-sum(us_deaths.dt$`max(Deaths)`)
+us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(Deaths=max(Deaths)) %>% data.table
+sum(us_deaths.dt$Deaths, na.rm=TRUE)
 
-data.dt[which(data.dt$Deaths %>% is.na), 'Deaths'] <- 0
-melted.dt <- data.dt[which(data.dt$Country_Region=='US'),]  %>%
-    melt.data.table(id.vars='Last_Update',measure.vars='Deaths', value.name='Deaths')
-
-ggplot(data=melted.dt) + 
-    geom_bar(mapping=aes(Last_Update))
+ggplot(data=us_deaths.dt) + 
+    geom_line(mapping=aes(Last_Update))
 
