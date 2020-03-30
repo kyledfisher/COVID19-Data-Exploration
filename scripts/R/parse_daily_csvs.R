@@ -40,7 +40,6 @@ suppress <- lapply(dates.list, function(x, raw.path) {
 }, raw.path)
 
 # trim whitespace and any trailing digits
-#trim<- function(x) return(sub('\\s\\d$', '', x))
 trim<- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
 
 # x <- dates.list[[1]]
@@ -53,8 +52,7 @@ data.dt <- lapply(dates.list, function(x) {
     tryCatch({
         tmp.dt$Last_Update <- tmp.dt$Last_Update %>% 
             trim %>% 
-            parse_date_time(orders=c('%m/%d/%y','%m/%d/%Y','%Y-%m-%d'))# %>% 
-            #substr(., 1, 10)
+            parse_date_time(orders=c('%m/%d/%y','%m/%d/%Y','%Y-%m-%d'))
         return(tmp.dt)},
         warning = function(w) {
             message(paste('Warning!  Check file:', x))
@@ -65,9 +63,14 @@ data.dt <- lapply(dates.list, function(x) {
     )
 }) %>% rbindlist(fill=TRUE)
 
-us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(Deaths=max(Deaths)) %>% data.table
-sum(us_deaths.dt$Deaths, na.rm=TRUE)
+data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
+us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(Daily_Deaths=max(Deaths)) %>% data.table
+us_deaths.dt$Cumulative_Deaths <- cumsum(us_deaths.dt$Daily_Deaths)
+sum(us_deaths.dt$Daily_Deaths)
 
-ggplot(data=us_deaths.dt) + 
-    geom_line(mapping=aes(Last_Update))
+melted.dt <- melt(us_deaths.dt, id.vars='Last_Update', variable.name = 'Deaths')
 
+ggplot(melted.dt, aes(x=Last_Update, y=value)) +
+    geom_point() + 
+    geom_line() + 
+    facet_wrap('Deaths')
