@@ -9,6 +9,7 @@
 
 library(magrittr)
 library(xml2)
+library(lubridate)
 library(data.table)
 library(dplyr)
 library(ggplot2)
@@ -38,40 +39,44 @@ suppress <- lapply(dates.list, function(x, raw.path) {
     download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
 }, raw.path)
 
+# trim whitespace and any trailing digits
 trim<- function(x) return(sub('\\s\\d$', '', x))
 
-# x <- dates.list[[2]]
+# x <- dates.list[[1]]
 data.dt <- lapply(dates.list, function(x) {
     tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
-    
-    # Fix formatting for first 10 days
+    colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
+    # Fix date formatting for first 10 days
     if (tstrsplit(x, split='\\.', keep=1) < '02-02-2020') {
-        colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
-        tryCatch(
+        tryCatch({
             tmp.dt$Last_Update <- substr(tmp.dt$Last_Update, 1, 9) %>% 
                 trim %>% 
                 parse_date_time(orders='m/d/y') %>% 
-                substr(., 1, 10),
+                substr(., 1, 10)
+            return(tmp.dt)},
             warning = function(w) {
-                message(x)
+                message(paste('Warning!  Check file:', x))
+            },
+            error = function(e) {
+                message(paste('Error!  Check file', x))
             }
         )
     } else {
         # Truncate Last_Update to daily values
         tmp.dt$Last_Update <- substr(tmp.dt$Last_Update, 1, 10)
+        return(tmp.dt)
     }
     
-    return (tmp.dt)
+    
 }) %>% rbindlist(fill=TRUE)
 
-sum(data.dt[data.dt$Country_Region=='US', 'Deaths'], na.rm = TRUE)
-data.dt%>% group_by(c(Country_Region, Deaths))
+us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(max(Deaths)) %>% data.table
+sum(us_deaths.dt$`max(Deaths)`)
 
 data.dt[which(data.dt$Deaths %>% is.na), 'Deaths'] <- 0
-melted.dt <- data.dt[which(data.dt$`Country/Region`=='US'),]  %>%
-    melt.data.table(id.vars='Last Update',measure.vars='Deaths', value.name='Deaths')
+melted.dt <- data.dt[which(data.dt$Country_Region=='US'),]  %>%
+    melt.data.table(id.vars='Last_Update',measure.vars='Deaths', value.name='Deaths')
 
 ggplot(data=melted.dt) + 
-    geom_bar(mapping=aes(`Last Update`))
-sum(melted.dt$Deaths)
+    geom_bar(mapping=aes(Last_Update))
 
