@@ -14,7 +14,7 @@ library(dplyr)
 library(ggplot2)
 
 # Set paths 
-
+git.path <- Sys.getenv('HOME')  # Where the base COVID19-Data-Exploration folder lives.
 
 # Pull in list of daily data. 
 xml.path <- 'https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports'
@@ -35,14 +35,14 @@ dates.list <- dates.list
 # Fetch raw csv data
 raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
 suppress <- lapply(dates.list, function(x, raw.path) {
-    download.file(paste0(raw.path, x), paste0('/Users/zach/Code/COVID19-Data-Exploration/data/',x))
+    download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
 }, raw.path)
 
 trim<- function(x) return(sub('\\s\\d$', '', x))
 
 # x <- dates.list[[2]]
 data.dt <- lapply(dates.list, function(x) {
-    tmp.dt <- fread(paste0('/Users/zach/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
+    tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
     
     # Fix formatting for first 10 days
     if (tstrsplit(x, split='\\.', keep=1) < '02-02-2020') {
