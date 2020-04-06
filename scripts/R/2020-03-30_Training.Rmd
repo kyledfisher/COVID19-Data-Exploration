@@ -4,7 +4,9 @@ author: "Zach"
 date: "2020-03-30"
 output: html_document
 ---
-
+*
+*
+# March 30, 2020
 Hello, and welcome to a summary the first training session for bio-group technical
 development!  This is an Rmarkdown document that will walk you through what we 
 did in the first session on March 30, 2020.
@@ -31,13 +33,119 @@ reasons:
 In the code below, we will walk through the initial setup of this project, which
 includes dowloading, cleaning, and organizing the data, and we will finish by
 generating a plot of the daily mortality rate in the U.S. as well as the total 
-to-date U.S. mortality count.  The code is organized so that we may easily adapt
-and expand upon it to answer other questions of interest, which so far have
-includued adding country population counts to the dataset and generating animated
-heatmaps of infections/deaths/recoveries over time.  Together, hopefully we will
-create some meaning from this unique situation and grow our knowledge and skillsets
-to better ourselves and our communities!  
+to-date U.S. mortality count.  This document is in a format known as an "R Markdown",
+which allows us to easily run each code chunk one at a time.  The code is 
+organized so that we may easily adapt and expand upon it to answer other questions 
+of interest, which so far have includued adding country population counts to the 
+dataset and generating animated heatmaps of infections/deaths/recoveries over time.  
+Together, hopefully we will create some meaning from this unique situation and 
+grow our knowledge and skillsets to better ourselves and our communities!  
+*
+*
+================================================================================
+*
+*
+## Libraries
+At the top of any script we write, first we include all the libraries used in this
+analysis.   These "libraries" are packages of code that we import to our script 
+so we may use some of their handy features.  For example, the "xml2" library allows
+us to download a webpage and extract all of the text from it in just a few simple
+lines of code!  A few commonly used libraries include data.table, dplyr, and 
+magrittr, all of which we will go into later.
+```{r libraries}
+library(magrittr)
+library(xml2)
+library(lubridate)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+```
 
+
+## Set paths
+This line is purely procedural.  Here we tell R in a platform-agnostic way where 
+to put on your computer the downloaded csv data as well as the R scripts.  In 
+other words, R makes a guess at where your home directory is, regardless of whether
+you are using Windows, MacOS, or Linux.
+```{r set-paths}
+git.path <- Sys.getenv('HOME')  # Where the base COVID19-Data-Exploration folder lives.
+```
+
+
+## Fetching the CSV data from Github
+Here's where we start to get our hands dirty.  In the 3 code chunks below, we 
+first download the Github webpage that has all of the csv files in it and extract 
+the text (*scrape-webpage*).  Second, we look through all of that text for any
+string of characters in the date format YYYY-MM-DD, since that is the naming 
+convention for all of the csv files, and make a list of those dates (*parse-dates*).  
+Finally, we use the list of dates (corresponding to the names of the csv files)
+to download the raw comma-separated data and save it locally to our computer 
+(*fetch-data*).
+
+```{r scrape-webpage}
+# Pull in list of daily data. 
+xml.path <- 'https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports'
+report.file <- download_html(xml.path)
+html.read <- read_html(report.file)
+csv.list <- xml_text(html.read) %>% strsplit(split='\\n') %>% unlist
+```
+
+```{r parse-dates}
+# Parse html for the csv names
+dates.list <- lapply(csv.list, function(x) {
+    if (grepl(pattern='.csv', x, fixed=TRUE)) { 
+        regex <- regexpr('\\d{2}-\\d{2}-\\d{4}.csv', x)
+        return(substr(x, start=regex[[1]], stop=regex[[1]]+attr(regex, 'match.length')))
+    }
+})
+dates.list[sapply(dates.list, is.null)] <- NULL
+dates.list <- dates.list
+```
+
+```{r fetch-data}
+# Fetch raw csv data
+raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
+suppress <- lapply(dates.list, function(x, raw.path) {
+    download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
+}, raw.path)
+```
+
+
+# trim whitespace and any trailing digits
+trim<- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
+
+# x <- dates.list[[1]]
+data.dt <- lapply(dates.list, function(x) {
+    
+    # Fix column names and standardize date formats
+    tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
+    colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
+    # Fix date formatting for first 10 days
+    tryCatch({
+        tmp.dt$Last_Update <- tmp.dt$Last_Update %>% 
+            trim %>% 
+            parse_date_time(orders=c('%m/%d/%y','%m/%d/%Y','%Y-%m-%d'))
+        return(tmp.dt)},
+        warning = function(w) {
+            message(paste('Warning!  Check file:', x))
+        },
+        error = function(e) {
+            message(paste('Error!  Check file', x))
+        }
+    )
+}) %>% rbindlist(fill=TRUE)
+
+data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
+us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(Daily_Deaths=max(Deaths)) %>% data.table
+us_deaths.dt$Cumulative_Deaths <- cumsum(us_deaths.dt$Daily_Deaths)
+sum(us_deaths.dt$Daily_Deaths)
+
+melted.dt <- melt(us_deaths.dt, id.vars='Last_Update', variable.name = 'Deaths')
+
+ggplot(melted.dt, aes(x=Last_Update, y=value)) +
+    geom_point() + 
+    geom_line() + 
+    facet_wrap('Deaths')
 
     
 
