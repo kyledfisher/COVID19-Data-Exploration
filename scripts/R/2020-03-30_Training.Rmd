@@ -44,6 +44,10 @@ grow our knowledge and skillsets to better ourselves and our communities!
 
 ================================================================================
 
+```{r include=FALSE}
+knitr::opts_chunk$set(message=FALSE)
+```
+
 
 ## Libraries
 At the top of any script we write, first we include all the libraries used in this
@@ -103,9 +107,8 @@ parse_dates.fn <- function(csv.list) {
     return(dates.list)
 }
 
-# dates.list <- parse_dates.fn(csv.list)
-# Drop null values in list
-dates.list[sapply(dates.list, is.null)] <- NULL
+dates.list <- parse_dates.fn(csv.list)
+dates.list[sapply(dates.list, is.null)] <- NULL  # Drop null values in list
 ```
 
 ```{r fetch-data}
@@ -126,9 +129,10 @@ small chunks, apply a set of operations to each chunk, and then recombine the
 chunks back into a new dataset.  This split-apply-combine approach is a common
 motif in data science and, once you get the hang of it, is a quite intuitive and
 useful way to handle your data!
+
 ```{r trim-func}
 # trim whitespace and any trailing digits
-trim<- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
+trim <- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
 ```
 
 ```{r tidy-up}
@@ -156,17 +160,26 @@ data.dt <- lapply(dates.list, function(x) {  # Split
 }) %>% rbindlist(fill=TRUE) # Combine
 ```
 
-data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
-us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(Daily_Deaths=max(Deaths)) %>% data.table
-us_deaths.dt$Cumulative_Deaths <- cumsum(us_deaths.dt$Daily_Deaths)
-sum(us_deaths.dt$Daily_Deaths)
 
+## Filtering the Dataset
+```{r filter-by-US}
+data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
+us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% 
+    summarize(Daily_Deaths=max(Deaths)) %>% data.table
+us_deaths.dt$Cumulative_Deaths <- cumsum(us_deaths.dt$Daily_Deaths)
+print(paste('Total U.S. Deaths:', sum(us_deaths.dt$Daily_Deaths)))
+```
+
+
+## Our First Plot
+```{r plot-deaths}
 melted.dt <- melt(us_deaths.dt, id.vars='Last_Update', variable.name = 'Deaths')
 
 ggplot(melted.dt, aes(x=Last_Update, y=value)) +
     geom_point() + 
     geom_line() + 
     facet_wrap('Deaths')
+```
 
     
 
