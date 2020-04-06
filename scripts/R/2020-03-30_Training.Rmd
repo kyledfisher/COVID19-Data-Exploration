@@ -1,11 +1,11 @@
 ---
-title: "2020-03-30_Training.Rmd"
+title: "2020-03-30 Bio-Group Data Training Session"
 author: "Zach"
 date: "2020-03-30"
 output: html_document
 ---
-*
-*
+
+
 # March 30, 2020
 Hello, and welcome to a summary the first training session for bio-group technical
 development!  This is an Rmarkdown document that will walk you through what we 
@@ -33,18 +33,18 @@ reasons:
 In the code below, we will walk through the initial setup of this project, which
 includes dowloading, cleaning, and organizing the data, and we will finish by
 generating a plot of the daily mortality rate in the U.S. as well as the total 
-to-date U.S. mortality count.  This document is in a format known as an "R Markdown",
+to-date U.S. mortality count.  This document is in a format known as "R Markdown",
 which allows us to easily run each code chunk one at a time.  The code is 
 organized so that we may easily adapt and expand upon it to answer other questions 
 of interest, which so far have includued adding country population counts to the 
 dataset and generating animated heatmaps of infections/deaths/recoveries over time.  
 Together, hopefully we will create some meaning from this unique situation and 
 grow our knowledge and skillsets to better ourselves and our communities!  
-*
-*
+
+
 ================================================================================
-*
-*
+
+
 ## Libraries
 At the top of any script we write, first we include all the libraries used in this
 analysis.   These "libraries" are packages of code that we import to our script 
@@ -91,15 +91,21 @@ csv.list <- xml_text(html.read) %>% strsplit(split='\\n') %>% unlist
 ```
 
 ```{r parse-dates}
-# Parse html for the csv names
-dates.list <- lapply(csv.list, function(x) {
+parse_dates.fn <- function(csv.list) {
+    # Parse html for the csv names
+    dates.list <- lapply(csv.list, function(x) {
     if (grepl(pattern='.csv', x, fixed=TRUE)) { 
         regex <- regexpr('\\d{2}-\\d{2}-\\d{4}.csv', x)
         return(substr(x, start=regex[[1]], stop=regex[[1]]+attr(regex, 'match.length')))
-    }
-})
+        }
+    })
+    
+    return(dates.list)
+}
+
+# dates.list <- parse_dates.fn(csv.list)
+# Drop null values in list
 dates.list[sapply(dates.list, is.null)] <- NULL
-dates.list <- dates.list
 ```
 
 ```{r fetch-data}
@@ -111,12 +117,24 @@ suppress <- lapply(dates.list, function(x, raw.path) {
 ```
 
 
+## Data Sanitization -- Making our Data Tidy
+Now that we have our data downloaded, we are ready to do some analysis, right?  
+Yes, but only if our data are in the right format.  In R, making one's data "tidy"
+doesn't just mean it is clean and neat in the general sense of those words; rather, 
+it means formatting one's data in a way that makes it easy to split it up into 
+small chunks, apply a set of operations to each chunk, and then recombine the 
+chunks back into a new dataset.  This split-apply-combine approach is a common
+motif in data science and, once you get the hang of it, is a quite intuitive and
+useful way to handle your data!
+```{r trim-func}
 # trim whitespace and any trailing digits
 trim<- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
+```
 
-# x <- dates.list[[1]]
-data.dt <- lapply(dates.list, function(x) {
+```{r tidy-up}
+data.dt <- lapply(dates.list, function(x) {  # Split
     
+    # -- Apply -- #
     # Fix column names and standardize date formats
     tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
     colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
@@ -133,7 +151,10 @@ data.dt <- lapply(dates.list, function(x) {
             message(paste('Error!  Check file', x))
         }
     )
-}) %>% rbindlist(fill=TRUE)
+    # -- End of Apply -- #
+    
+}) %>% rbindlist(fill=TRUE) # Combine
+```
 
 data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
 us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(Daily_Deaths=max(Deaths)) %>% data.table
