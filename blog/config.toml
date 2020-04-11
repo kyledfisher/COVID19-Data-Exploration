@@ -40,7 +40,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
     [params.logo]
     url = "QSI_NV5_logo.png"
-    width = 125
-    height = 50
+    width = 315
+    height = 128
     alt = "Logo"
 
