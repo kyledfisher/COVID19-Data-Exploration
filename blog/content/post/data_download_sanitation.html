@@ -1,0 +1,121 @@
+---
+title: "Data Download and Sanitation (and our first plot!)"
+author: "Zach"
+date: "2020-03-30"
+output: html_document
+---
+
+
+
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<p>At the top of any script we write, first we include all the libraries used in this
+analysis. These “libraries” are packages of code that we import to our script
+so we may use some of their handy features. For example, the “xml2” library allows
+us to download a webpage and extract all of the text from it in just a few simple
+lines of code! A few commonly used libraries include data.table, dplyr, and
+magrittr, all of which we will go into later.</p>
+<pre class="r"><code>library(magrittr)
+library(xml2)
+library(lubridate)
+library(data.table)
+library(dplyr)
+library(ggplot2)</code></pre>
+</div>
+<div id="set-paths" class="section level2">
+<h2>Set paths</h2>
+<p>This line is purely procedural. Here we tell R in a platform-agnostic way where
+to put on your computer the downloaded csv data as well as the R scripts. In
+other words, R makes a guess at where your home directory is, regardless of whether
+you are using Windows, MacOS, or Linux.</p>
+<pre class="r"><code>git.path &lt;- Sys.getenv(&#39;HOME&#39;)  # Where the base COVID19-Data-Exploration folder lives.</code></pre>
+</div>
+<div id="fetching-the-csv-data-from-github" class="section level2">
+<h2>Fetching the CSV data from Github</h2>
+<p>Here’s where we start to get our hands dirty. In the 3 code chunks below, we
+first download the Github webpage that has all of the csv files in it and extract
+the text (<em>scrape-webpage</em>). Second, we look through all of that text for any
+string of characters in the date format YYYY-MM-DD, since that is the naming
+convention for all of the csv files, and make a list of those dates (<em>parse-dates</em>).<br />
+Finally, we use the list of dates (corresponding to the names of the csv files)
+to download the raw comma-separated data and save it locally to our computer
+(<em>fetch-data</em>).</p>
+<pre class="r"><code># Pull in list of daily data. 
+xml.path &lt;- &#39;https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports&#39;
+report.file &lt;- download_html(xml.path)
+html.read &lt;- read_html(report.file)
+csv.list &lt;- xml_text(html.read) %&gt;% strsplit(split=&#39;\\n&#39;) %&gt;% unlist</code></pre>
+<pre class="r"><code>parse_dates.fn &lt;- function(csv.list) {
+    # Parse html for the csv names
+    dates.list &lt;- lapply(csv.list, function(x) {
+    if (grepl(pattern=&#39;.csv&#39;, x, fixed=TRUE)) { 
+        regex &lt;- regexpr(&#39;\\d{2}-\\d{2}-\\d{4}.csv&#39;, x)
+        return(substr(x, start=regex[[1]], stop=regex[[1]]+attr(regex, &#39;match.length&#39;)))
+        }
+    })
+    
+    return(dates.list)
+}
+
+dates.list &lt;- parse_dates.fn(csv.list)
+dates.list[sapply(dates.list, is.null)] &lt;- NULL  # Drop null values in list</code></pre>
+<pre class="r"><code># Fetch raw csv data
+raw.path &lt;- &#39;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/&#39;
+suppress &lt;- lapply(dates.list, function(x, raw.path) {
+    download.file(paste0(raw.path, x), paste0(git.path,&#39;/Code/COVID19-Data-Exploration/data/&#39;,x))
+}, raw.path)</code></pre>
+</div>
+<div id="data-sanitization-making-our-data-tidy" class="section level2">
+<h2>Data Sanitization – Making our Data Tidy</h2>
+<p>Now that we have our data downloaded, we are ready to do some analysis, right?<br />
+Yes, but only if our data are in the right format. In R, making one’s data “tidy”
+doesn’t just mean it is clean and neat in the general sense of those words; rather,
+it means formatting one’s data in a way that makes it easy to split it up into
+small chunks, apply a set of operations to each chunk, and then recombine the
+chunks back into a new dataset. This split-apply-combine approach is a common
+motif in data science and, once you get the hang of it, is a quite intuitive and
+useful way to handle your data!</p>
+<pre class="r"><code># trim whitespace and any trailing digits
+trim &lt;- function(x) return(tstrsplit(x, &quot;\\s|[A-Z]&quot;, keep=1) %&gt;%unlist)</code></pre>
+<pre class="r"><code>data.dt &lt;- lapply(dates.list, function(x) {  # Split
+    
+    # -- Apply -- #
+    # Fix column names and standardize date formats
+    tmp.dt &lt;- fread(paste0(git.path,&#39;/Code/COVID19-Data-Exploration/data/&#39;,x)) %&gt;% data.table
+    colnames(tmp.dt) &lt;- colnames(tmp.dt) %&gt;% gsub(&#39;[ \\/]&#39;, &#39;_&#39;, .)  # sub spaces and slashes for underscore
+    # Fix date formatting for first 10 days
+    tryCatch({
+        tmp.dt$Last_Update &lt;- tmp.dt$Last_Update %&gt;% 
+            trim %&gt;% 
+            parse_date_time(orders=c(&#39;%m/%d/%y&#39;,&#39;%m/%d/%Y&#39;,&#39;%Y-%m-%d&#39;))
+        return(tmp.dt)},
+        warning = function(w) {
+            message(paste(&#39;Warning!  Check file:&#39;, x))
+        },
+        error = function(e) {
+            message(paste(&#39;Error!  Check file&#39;, x))
+        }
+    )
+    # -- End of Apply -- #
+    
+}) %&gt;% rbindlist(fill=TRUE) # Combine</code></pre>
+</div>
+<div id="filtering-the-dataset" class="section level2">
+<h2>Filtering the Dataset</h2>
+<pre class="r"><code>data.dt[data.dt$Deaths%&gt;%is.na, &#39;Deaths&#39;] &lt;- 0
+us_deaths.dt &lt;- data.dt[data.dt$Country_Region==&#39;US&#39;,] %&gt;% group_by(Last_Update) %&gt;% 
+    summarize(Daily_Deaths=max(Deaths)) %&gt;% data.table
+us_deaths.dt$Cumulative_Deaths &lt;- cumsum(us_deaths.dt$Daily_Deaths)
+print(paste(&#39;Total U.S. Deaths:&#39;, sum(us_deaths.dt$Daily_Deaths)))</code></pre>
+<pre><code>## [1] &quot;Total U.S. Deaths: 36038&quot;</code></pre>
+</div>
+<div id="our-first-plot" class="section level2">
+<h2>Our First Plot</h2>
+<pre class="r"><code>melted.dt &lt;- melt(us_deaths.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Deaths&#39;)
+
+ggplot(melted.dt, aes(x=Last_Update, y=value)) +
+    geom_point() + 
+    geom_line() + 
+    facet_wrap(&#39;Deaths&#39;)</code></pre>
+<p><img src="/post/data_download_sanitation_files/figure-html/plot-deaths-1.png" width="672" /></p>
+</div>
