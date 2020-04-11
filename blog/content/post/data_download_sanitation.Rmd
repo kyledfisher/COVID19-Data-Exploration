@@ -1,0 +1,147 @@
+---
+title: "Data Download and Sanitation (and our first plot!)"
+author: "Zach"
+date: "2020-03-30"
+output: html_document
+---
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(message=FALSE)
+```
+
+
+## Libraries
+At the top of any script we write, first we include all the libraries used in this
+analysis.   These "libraries" are packages of code that we import to our script 
+so we may use some of their handy features.  For example, the "xml2" library allows
+us to download a webpage and extract all of the text from it in just a few simple
+lines of code!  A few commonly used libraries include data.table, dplyr, and 
+magrittr, all of which we will go into later.
+```{r libraries}
+library(magrittr)
+library(xml2)
+library(lubridate)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+```
+
+
+## Set paths
+This line is purely procedural.  Here we tell R in a platform-agnostic way where 
+to put on your computer the downloaded csv data as well as the R scripts.  In 
+other words, R makes a guess at where your home directory is, regardless of whether
+you are using Windows, MacOS, or Linux.
+```{r set-paths}
+git.path <- Sys.getenv('HOME')  # Where the base COVID19-Data-Exploration folder lives.
+```
+
+
+## Fetching the CSV data from Github
+Here's where we start to get our hands dirty.  In the 3 code chunks below, we 
+first download the Github webpage that has all of the csv files in it and extract 
+the text (*scrape-webpage*).  Second, we look through all of that text for any
+string of characters in the date format YYYY-MM-DD, since that is the naming 
+convention for all of the csv files, and make a list of those dates (*parse-dates*).  
+Finally, we use the list of dates (corresponding to the names of the csv files)
+to download the raw comma-separated data and save it locally to our computer 
+(*fetch-data*).
+
+```{r scrape-webpage}
+# Pull in list of daily data. 
+xml.path <- 'https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports'
+report.file <- download_html(xml.path)
+html.read <- read_html(report.file)
+csv.list <- xml_text(html.read) %>% strsplit(split='\\n') %>% unlist
+```
+
+```{r parse-dates}
+parse_dates.fn <- function(csv.list) {
+    # Parse html for the csv names
+    dates.list <- lapply(csv.list, function(x) {
+    if (grepl(pattern='.csv', x, fixed=TRUE)) { 
+        regex <- regexpr('\\d{2}-\\d{2}-\\d{4}.csv', x)
+        return(substr(x, start=regex[[1]], stop=regex[[1]]+attr(regex, 'match.length')))
+        }
+    })
+    
+    return(dates.list)
+}
+
+dates.list <- parse_dates.fn(csv.list)
+dates.list[sapply(dates.list, is.null)] <- NULL  # Drop null values in list
+```
+
+```{r fetch-data}
+# Fetch raw csv data
+raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
+suppress <- lapply(dates.list, function(x, raw.path) {
+    download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
+}, raw.path)
+```
+
+
+## Data Sanitization -- Making our Data Tidy
+Now that we have our data downloaded, we are ready to do some analysis, right?  
+Yes, but only if our data are in the right format.  In R, making one's data "tidy"
+doesn't just mean it is clean and neat in the general sense of those words; rather, 
+it means formatting one's data in a way that makes it easy to split it up into 
+small chunks, apply a set of operations to each chunk, and then recombine the 
+chunks back into a new dataset.  This split-apply-combine approach is a common
+motif in data science and, once you get the hang of it, is a quite intuitive and
+useful way to handle your data!
+
+```{r trim-func}
+# trim whitespace and any trailing digits
+trim <- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
+```
+
+```{r tidy-up}
+data.dt <- lapply(dates.list, function(x) {  # Split
+    
+    # -- Apply -- #
+    # Fix column names and standardize date formats
+    tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
+    colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
+    # Fix date formatting for first 10 days
+    tryCatch({
+        tmp.dt$Last_Update <- tmp.dt$Last_Update %>% 
+            trim %>% 
+            parse_date_time(orders=c('%m/%d/%y','%m/%d/%Y','%Y-%m-%d'))
+        return(tmp.dt)},
+        warning = function(w) {
+            message(paste('Warning!  Check file:', x))
+        },
+        error = function(e) {
+            message(paste('Error!  Check file', x))
+        }
+    )
+    # -- End of Apply -- #
+    
+}) %>% rbindlist(fill=TRUE) # Combine
+```
+
+
+## Filtering the Dataset
+```{r filter-by-US}
+data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
+us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% 
+    summarize(Daily_Deaths=max(Deaths)) %>% data.table
+us_deaths.dt$Cumulative_Deaths <- cumsum(us_deaths.dt$Daily_Deaths)
+print(paste('Total U.S. Deaths:', sum(us_deaths.dt$Daily_Deaths)))
+```
+
+
+## Our First Plot
+```{r plot-deaths}
+melted.dt <- melt(us_deaths.dt, id.vars='Last_Update', variable.name = 'Deaths')
+
+ggplot(melted.dt, aes(x=Last_Update, y=value)) +
+    geom_point() + 
+    geom_line() + 
+    facet_wrap('Deaths')
+```
+
+    
+
