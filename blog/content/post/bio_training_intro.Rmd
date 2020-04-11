@@ -19,8 +19,8 @@ University Center for Systems Science and Engineering (JHU CSSE), for two main
 reasons:
 
 
-1. They maintain a most excellent data dashboard located here: 
-(https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) 
+1. They maintain [*a most excellent data dashboard*](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
+with a visually appealing spatial map of reported cases.
 Of particular interest to us is the spatial location data, meaning that we too
 can generate our own maps from these data.  Thanks to Kelsey for the original 
 share!
