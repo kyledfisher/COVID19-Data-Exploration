@@ -17,13 +17,13 @@ spread of the disease.  We opted to use the dataset maintained bythe Johns Hopki
 University Center for Systems Science and Engineering (JHU CSSE), for two main
 reasons:
 
-    1) They maintain a most excellent data dashboard located here: 
+    1. They maintain a most excellent data dashboard located here: 
     (https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) 
     Of particular interest to us is the spatial location data, meaning that we too
     can generate our own maps from these data.  Thanks to Kelsey for the original 
     share!
     
-    2) The entire dataset is conveniently located on github 
+    2. The entire dataset is conveniently located on github 
     (https://github.com/CSSEGISandData/COVID-19), updated daily, and is entirely 
     contained within comma-separated-values files (.csv files).  Many modern 
     programming languages,including R and Python, have libraries or packages that 
