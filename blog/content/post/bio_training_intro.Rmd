@@ -33,7 +33,7 @@ interface well with .csv files, making it a breeze to ingest, manipulate, and
 analyze the data within!
 
      
-In the next post [*Data Download and Sanitation*](https://qsi-cvo-bioanalytics.netlify.com/) 
+In the next post, [*Data Download and Sanitation*], (https://qsi-cvo-bioanalytics.netlify.com/) 
 we will walk through the initial setup of this project, which includes dowloading, cleaning, and organizing the data, and we will finish bygenerating a plot of the daily mortality rate in the U.S. as well as the total 
 to-date U.S. recovery count.  This document is in a format known as [*R Markdown*](https://rmarkdown.rstudio.com/),
 which allows us to easily run each code chunk one at a time.  The code is 
