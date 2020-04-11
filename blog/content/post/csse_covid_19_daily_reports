@@ -20,7 +20,7 @@
 
   <link crossorigin="anonymous" media="all" integrity="sha512-FG+rXqMOivrAjdEQE7tO4BwM1poGmg70hJFTlNSxjX87grtrZ6UnPR8NkzwUHlQEGviu9XuRYeO8zH9YwvZhdg==" rel="stylesheet" href="https://github.githubassets.com/assets/frameworks-146fab5ea30e8afac08dd11013bb4ee0.css" />
   <link crossorigin="anonymous" media="all" integrity="sha512-iXrV/b4ypc1nr10b3Giikqff+qAx5osQ0yJRxHRDd8mKFefdMtEZ0Sxs1QysJxuJBayOKThjsuMjynwBJQq0aw==" rel="stylesheet" href="https://github.githubassets.com/assets/site-897ad5fdbe32a5cd67af5d1bdc68a292.css" />
-    <link crossorigin="anonymous" media="all" integrity="sha512-JbFUBIZFtZoXLJeWZlrXpJb0sqZWgmgw7t+tEZuz0UPgJhF77FY5vSEzGLDsVb0BeyUhsg8lmftVk/6o7ISq4Q==" rel="stylesheet" href="https://github.githubassets.com/assets/github-25b154048645b59a172c9796665ad7a4.css" />
+    <link crossorigin="anonymous" media="all" integrity="sha512-vMKRtbQ9h8VmzccMNdmnlBnTLM9zZar8f9BKU3A5UNRZgr3o2+zXRScLx7V1nd9HupewEuevhEx2D3yuqNpkXw==" rel="stylesheet" href="https://github.githubassets.com/assets/github-bcc291b5b43d87c566cdc70c35d9a794.css" />
     
     
     
@@ -42,7 +42,7 @@
   
   
 
-  <meta name="request-id" content="EE26:0420:10A121:16B699:5E901082" data-pjax-transient="true"/><meta name="html-safe-nonce" content="6c0b99ef07493c78c9b99ba5afcd122277e704ae" data-pjax-transient="true"/><meta name="visitor-payload" content="eyJyZWZlcnJlciI6IiIsInJlcXVlc3RfaWQiOiJFRTI2OjA0MjA6MTBBMTIxOjE2QjY5OTo1RTkwMTA4MiIsInZpc2l0b3JfaWQiOiI0NjA2MTg3NjE1NzY2NDUwMzA2IiwicmVnaW9uX2VkZ2UiOiJzZWEiLCJyZWdpb25fcmVuZGVyIjoic2VhIn0=" data-pjax-transient="true"/><meta name="visitor-hmac" content="2fb6fac5986028c02a8e1526af6cee6dbb3566e5708017f77810e7639fea5c38" data-pjax-transient="true"/>
+  <meta name="request-id" content="FC62:0647:3106A0:43D963:5E916A69" data-pjax-transient="true"/><meta name="html-safe-nonce" content="2386b69831159a42e48d2864422a4508bb8cb80e" data-pjax-transient="true"/><meta name="visitor-payload" content="eyJyZWZlcnJlciI6IiIsInJlcXVlc3RfaWQiOiJGQzYyOjA2NDc6MzEwNkEwOjQzRDk2Mzo1RTkxNkE2OSIsInZpc2l0b3JfaWQiOiIyMjQyODg0NDIyMzM3NDM5NzciLCJyZWdpb25fZWRnZSI6InNlYSIsInJlZ2lvbl9yZW5kZXIiOiJzZWEifQ==" data-pjax-transient="true"/><meta name="visitor-hmac" content="2d36219bd9bb02d1be30907995a677d9bda33aad635c344d3218dcb1252ee43c" data-pjax-transient="true"/>
 
 
 
@@ -76,9 +76,9 @@
       <meta name="expected-hostname" content="github.com">
 
 
-    <meta name="enabled-features" content="MARKETPLACE_INVOICED_BILLING,MARKETPLACE_SOCIAL_PROOF_CUSTOMERS,MARKETPLACE_TRENDING_SOCIAL_PROOF,MARKETPLACE_RECOMMENDATIONS,MARKETPLACE_PENDING_INSTALLATIONS,RELATED_ISSUES">
+    <meta name="enabled-features" content="MARKETPLACE_SOCIAL_PROOF_CUSTOMERS,MARKETPLACE_TRENDING_SOCIAL_PROOF,MARKETPLACE_RECOMMENDATIONS,MARKETPLACE_PENDING_INSTALLATIONS,RELATED_ISSUES">
 
-  <meta http-equiv="x-pjax-version" content="59da4d24ed9acc79d803f56f7267e3ad">
+  <meta http-equiv="x-pjax-version" content="17bc53639b6593968397760e36d80b86">
   
 
       <link href="https://github.com/CSSEGISandData/COVID-19/commits/master.atom" rel="alternate" title="Recent Commits to COVID-19:master" type="application/atom+xml">
@@ -109,18 +109,18 @@
   <body class="logged-out env-production min-width-lg">
     
 
-  <div class="position-relative js-header-wrapper ">
-    <a href="#start-of-content" class="px-2 py-4 bg-blue text-white show-on-focus js-skip-to-content">Skip to content</a>
-    <span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar">
-      <span class="progress-pjax-loader-bar top-0 left-0" style="width: 0%;"></span>
-    </span>
+    <div class="position-relative js-header-wrapper ">
+      <a href="#start-of-content" class="px-2 py-4 bg-blue text-white show-on-focus js-skip-to-content">Skip to content</a>
+      <span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar">
+        <span class="progress-pjax-loader-bar top-0 left-0" style="width: 0%;"></span>
+      </span>
 
-    
-    
+      
+      
 
 
 
-        <header class="Header-old header-logged-out  position-relative f4 py-2" role="banner">
+          <header class="Header-old header-logged-out  position-relative f4 py-2" role="banner">
   <div class="container-lg d-flex px-3">
     <div class="d-flex flex-justify-between flex-items-center">
         <a class="mr-4" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
@@ -261,7 +261,7 @@
           spellcheck="false"
           autocomplete="off"
           >
-          <input type="hidden" data-csrf="true" class="js-data-jump-to-suggestions-path-csrf" value="i3Lajl5xFQ2xA6DFVx6+ovdWh5Rw63M4IpJF58CxE2x0jyyLLPSyzQ0iBzsfCkbaiLMAbIkaTGjDZJaGj7jOXw==" />
+          <input type="hidden" data-csrf="true" class="js-data-jump-to-suggestions-path-csrf" value="Parqd/y14vSDG1ux2LohjCRO5tJnjx9O1V/4wckvJXmVkCexN/unNbNCqneHo1wKRC3HZ6Vivjz78GiEpj+1Vw==" />
           <input type="hidden" class="js-site-search-type-field" name="type" >
             <img src="https://github.githubassets.com/images/search-key-slash.svg" alt="" class="mr-2 header-search-key-slash">
 
@@ -400,7 +400,7 @@
   </div>
 </header>
 
-  </div>
+    </div>
 
   <div id="start-of-content" class="show-on-focus"></div>
 
@@ -477,8 +477,8 @@
     <svg class="octicon octicon-eye v-align-text-bottom" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
     Watch
 </a>    <a class="social-count" href="/CSSEGISandData/COVID-19/watchers"
-       aria-label="911 users are watching this repository">
-      911
+       aria-label="915 users are watching this repository">
+      915
     </a>
 
   </li>
@@ -490,8 +490,8 @@
       Star
 </a>
     <a class="social-count js-social-count" href="/CSSEGISandData/COVID-19/stargazers"
-      aria-label="19938 users starred this repository">
-      19.9k
+      aria-label="20063 users starred this repository">
+      20.1k
     </a>
 
   </li>
@@ -502,8 +502,8 @@
         Fork
 </a>
     <a href="/CSSEGISandData/COVID-19/network/members" class="social-count"
-       aria-label="10687 users forked this repository">
-      10.7k
+       aria-label="10808 users forked this repository">
+      10.8k
     </a>
   </li>
 </ul>
@@ -527,7 +527,7 @@
       <a itemprop="url" data-hotkey="g i" class="js-selected-navigation-item reponav-item" data-selected-links="repo_issues repo_labels repo_milestones /CSSEGISandData/COVID-19/issues" href="/CSSEGISandData/COVID-19/issues">
         <div class="d-inline"><svg class="octicon octicon-issue-opened" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 011.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></div>
         <span itemprop="name">Issues</span>
-        <span class="Counter">1,110</span>
+        <span class="Counter">1,120</span>
         <meta itemprop="position" content="2">
 </a>    </span>
 
@@ -638,18 +638,18 @@
   
 
 
-        <a data-pjax="true" title="automated update" class="message text-inherit" href="/CSSEGISandData/COVID-19/commit/ae5e8eacbcbf0ff9f3d1bd1b0fe0b25f3fab6e41">automated update</a>
+        <a data-pjax="true" title="automated update" class="message text-inherit" href="/CSSEGISandData/COVID-19/commit/a582ad61067bfb7a9e9582edb741f0ee6b3f5d5a">automated update</a>
 
     </div>
     <div class="no-wrap d-flex flex-self-start flex-items-baseline">
         <span class="mr-2 flex-self-center">
-          <include-fragment accept="text/fragment+html" src="/CSSEGISandData/COVID-19/commit/ae5e8eacbcbf0ff9f3d1bd1b0fe0b25f3fab6e41/rollup?direction=w" class="d-inline"></include-fragment>
+          <include-fragment accept="text/fragment+html" src="/CSSEGISandData/COVID-19/commit/a582ad61067bfb7a9e9582edb741f0ee6b3f5d5a/rollup?direction=w" class="d-inline"></include-fragment>
         </span>
       <span class="mr-1">Latest commit</span>
-      <a class="commit-tease-sha mr-1" href="/CSSEGISandData/COVID-19/commit/ae5e8eacbcbf0ff9f3d1bd1b0fe0b25f3fab6e41" data-pjax>
-        ae5e8ea
+      <a class="commit-tease-sha mr-1" href="/CSSEGISandData/COVID-19/commit/a582ad61067bfb7a9e9582edb741f0ee6b3f5d5a" data-pjax>
+        a582ad6
       </a>
-      <span itemprop="dateModified"><relative-time datetime="2020-04-09T23:50:01Z" class="no-wrap">Apr 9, 2020</relative-time></span>
+      <span itemprop="dateModified"><relative-time datetime="2020-04-10T23:50:01Z" class="no-wrap">Apr 10, 2020</relative-time></span>
     </div>
     </div>
   </div>
@@ -657,7 +657,7 @@
   
 
 
-    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/CSSEGISandData/COVID-19/tree/130954a27f7d6a36acbfacbb2fcf807f98dd0d7f/csse_covid_19_data/csse_covid_19_daily_reports">Permalink</a>
+    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/CSSEGISandData/COVID-19/tree/6e3f6284d4add1e2eba68609c1e763c99f95112f/csse_covid_19_data/csse_covid_19_daily_reports">Permalink</a>
 
     <table class="files js-navigation-container js-active-navigation-container " data-pjax>
       <thead>
@@ -2048,6 +2048,23 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-10-2020.csv" id="e68ca8a97c84482c7b7a6487deaa1f41-2bd622db4cb4ecab94eae3f06ea05a636881cda3" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-10-2020.csv">04-10-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/a582ad61067bfb7a9e9582edb741f0ee6b3f5d5a">automated update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-10T23:50:01Z" class="no-wrap">Apr 10, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
               <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="README.md" id="04c6e90faac2675aa89e2176d2eec7d8-e69de29bb2d1d6434b8b29ae775ad8c2e48c5391" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/README.md">README.md</a></span>
             </td>
             <td class="message">
@@ -2126,7 +2143,7 @@
       <script crossorigin="anonymous" async="async" integrity="sha512-qUt0W3Q++EcTV/FjWCH4pkCuFrwLmBaxXaem85oHWp5D40Jb6WozJdUpeKQgU3fguUZ7cqxD1gpjU6f4u3ScKg==" type="application/javascript" src="https://github.githubassets.com/assets/vendor-a94b745b.js"></script>
       <script crossorigin="anonymous" async="async" integrity="sha512-rgIRUbqgpAtwFR6lNuW9DuiSVk+gbHzQ/lEcAp6761XMCTO1v6u6kMjlhnn+mW3zSTzwUBO9hkMvfgeNhPiSwA==" type="application/javascript" src="https://github.githubassets.com/assets/frameworks-ae021151.js"></script>
     
-    <script crossorigin="anonymous" async="async" integrity="sha512-IK+arqpC40hIjrm6sUlKRx0lPSQ9dBsKpHyHEYgWeUoboST1WHe1sAbmsEgM1iv+mWcykQc9YiOrl6jQtMpx4Q==" type="application/javascript" src="https://github.githubassets.com/assets/github-bootstrap-20af9aae.js"></script>
+    <script crossorigin="anonymous" async="async" integrity="sha512-uhFW7jBCe4MB/BelZxBqEbkA802lS//XeCrBsrl19aKSdq57weX85DETrTgMTEqhVIzlYNuYYnuKsXcQhhK6EQ==" type="application/javascript" src="https://github.githubassets.com/assets/github-bootstrap-ba1156ee.js"></script>
     
     
     
