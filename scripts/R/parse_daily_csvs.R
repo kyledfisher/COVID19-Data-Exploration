@@ -31,13 +31,14 @@ dates.list <- lapply(csv.list, function(x) {
     }
 })
 dates.list[sapply(dates.list, is.null)] <- NULL
-dates.list <- dates.list
+curr_csvs.list <- list.files(paste0(git.path, '/Code/COVID19-Data-Exploration/data/'))
 
 # Fetch raw csv data
 raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
-suppress <- lapply(dates.list, function(x, raw.path) {
-    download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
-}, raw.path)
+suppress <- lapply(dates.list, function(x, raw.path, curr_csvs.list) {
+    if (!(x %in% curr_csvs.list))  # Only download most recent csv
+        download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
+}, raw.path, curr_csvs.list)
 
 # trim whitespace and any trailing digits
 trim<- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)

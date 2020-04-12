@@ -128,11 +128,13 @@ csv.list &lt;- xml_text(html.read) %&gt;% strsplit(split=&#39;\\n&#39;) %&gt;% u
 }
 
 dates.list &lt;- parse_dates.fn(csv.list)
-dates.list[sapply(dates.list, is.null)] &lt;- NULL  # Drop null values in list</code></pre>
+dates.list[sapply(dates.list, is.null)] &lt;- NULL  # Drop null values in list
+curr_csvs.list &lt;- list.files(paste0(git.path, &#39;/Code/COVID19-Data-Exploration/data/&#39;))</code></pre>
 <pre class="r"><code># Fetch raw csv data
 raw.path &lt;- &#39;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/&#39;
 suppress &lt;- lapply(dates.list, function(x, raw.path) {
-    download.file(paste0(raw.path, x), paste0(git.path,&#39;/Code/COVID19-Data-Exploration/data/&#39;,x))
+    if (!(x %in% curr_csvs.list))  # Only download most recent csv
+        download.file(paste0(raw.path, x), paste0(git.path,&#39;/Code/COVID19-Data-Exploration/data/&#39;,x))
 }, raw.path)</code></pre>
 </div>
 <div id="data-sanitization-making-our-data-tidy" class="section level2">
@@ -177,7 +179,7 @@ us_deaths.dt &lt;- data.dt[data.dt$Country_Region==&#39;US&#39;,] %&gt;% group_b
     summarize(Daily_Deaths=max(Deaths)) %&gt;% data.table
 us_deaths.dt$Cumulative_Deaths &lt;- cumsum(us_deaths.dt$Daily_Deaths)
 print(paste(&#39;Total U.S. Deaths:&#39;, sum(us_deaths.dt$Daily_Deaths)))</code></pre>
-<pre><code>## [1] &quot;Total U.S. Deaths: 36038&quot;</code></pre>
+<pre><code>## [1] &quot;Total U.S. Deaths: 42405&quot;</code></pre>
 </div>
 <div id="our-first-plot" class="section level2">
 <h2>Our First Plot</h2>

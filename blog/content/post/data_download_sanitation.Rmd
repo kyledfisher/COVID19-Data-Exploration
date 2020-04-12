@@ -71,13 +71,15 @@ parse_dates.fn <- function(csv.list) {
 
 dates.list <- parse_dates.fn(csv.list)
 dates.list[sapply(dates.list, is.null)] <- NULL  # Drop null values in list
+curr_csvs.list <- list.files(paste0(git.path, '/Code/COVID19-Data-Exploration/data/'))
 ```
 
 ```{r fetch-data}
 # Fetch raw csv data
 raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
 suppress <- lapply(dates.list, function(x, raw.path) {
-    download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
+    if (!(x %in% curr_csvs.list))  # Only download most recent csv
+        download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
 }, raw.path)
 ```
 
