@@ -64,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">3 min read</span>
+    <span class="article-duration">4 min read</span>
     
 
     <h1 class="article-title">Data Download and Sanitation (and our first plot!)</h1>
@@ -91,6 +91,12 @@ library(lubridate)
 library(data.table)
 library(dplyr)
 library(ggplot2)</code></pre>
+</div>
+<div id="set-country-name" class="section level2">
+<h2>Set Country Name</h2>
+<p>Setting this line allows us to easily switch between countries.</p>
+<pre class="r"><code># Choose country to look at
+country.switch &lt;- &#39;France&#39;</code></pre>
 </div>
 <div id="set-paths" class="section level2">
 <h2>Set paths</h2>
@@ -174,22 +180,35 @@ trim &lt;- function(x) return(tstrsplit(x, &quot;\\s|[A-Z]&quot;, keep=1) %&gt;%
 </div>
 <div id="filtering-the-dataset" class="section level2">
 <h2>Filtering the Dataset</h2>
-<pre class="r"><code>data.dt[data.dt$Deaths%&gt;%is.na, &#39;Deaths&#39;] &lt;- 0
-us_deaths.dt &lt;- data.dt[data.dt$Country_Region==&#39;US&#39;,] %&gt;% group_by(Last_Update) %&gt;% 
-    summarize(Daily_Deaths=max(Deaths)) %&gt;% data.table
-us_deaths.dt$Cumulative_Deaths &lt;- cumsum(us_deaths.dt$Daily_Deaths)
-print(paste(&#39;Total U.S. Deaths:&#39;, sum(us_deaths.dt$Daily_Deaths)))</code></pre>
-<pre><code>## [1] &quot;Total U.S. Deaths: 42405&quot;</code></pre>
+<pre class="r"><code>data.dt[data.dt$Recovered%&gt;%is.na, &#39;Recovered&#39;] &lt;- 0
+data.dt[data.dt$Deaths%&gt;%is.na, &#39;Deaths&#39;] &lt;- 0
+data.dt[data.dt$Confirmed%&gt;%is.na, &#39;Confirmed&#39;] &lt;- 0
+
+country_cases.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt;% 
+    group_by(Last_Update) %&gt;% 
+    summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %&gt;% 
+    data.table
+
+# Make separate data table for confirmed, since it can be an order of magnitude
+# higher than recovered/death reports.
+country_confirmed.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt;% 
+    group_by(Last_Update) %&gt;% 
+    summarize(Confirmed=max(Confirmed)) %&gt;% data.table</code></pre>
 </div>
 <div id="our-first-plot" class="section level2">
 <h2>Our First Plot</h2>
-<pre class="r"><code>melted.dt &lt;- melt(us_deaths.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Deaths&#39;)
-
-ggplot(melted.dt, aes(x=Last_Update, y=value)) +
+<pre class="r"><code>melted.dt &lt;- melt(country_confirmed.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
+                  value.name=&#39;Number.Reported&#39;)
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
     geom_point() + 
-    geom_line() + 
-    facet_wrap(&#39;Deaths&#39;)</code></pre>
-<p><img src="/post/data_download_sanitation_files/figure-html/plot-deaths-1.png" width="672" /></p>
+    geom_line()</code></pre>
+<p><img src="/post/data_download_sanitation_files/figure-html/plot-cases-1.png" width="672" /></p>
+<pre class="r"><code>melted.dt &lt;- melt(country_cases.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
+                  value.name=&#39;Number.Reported&#39;)
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
+    geom_point() + 
+    geom_line()</code></pre>
+<p><img src="/post/data_download_sanitation_files/figure-html/plot-cases-2.png" width="672" /></p>
 </div>
 
     </div>
