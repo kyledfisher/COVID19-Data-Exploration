@@ -28,6 +28,13 @@ library(ggplot2)
 ```
 
 
+## Set Country Name
+Setting this line allows us to easily switch between countries.
+```{r country-switch}
+# Choose country to look at
+country.switch <- 'France'
+```
+
 ## Set paths
 This line is purely procedural.  Here we tell R in a platform-agnostic way where 
 to put on your computer the downloaded csv data as well as the R scripts.  In 
@@ -127,22 +134,37 @@ data.dt <- lapply(dates.list, function(x) {  # Split
 
 ## Filtering the Dataset
 ```{r filter-by-US}
+data.dt[data.dt$Recovered%>%is.na, 'Recovered'] <- 0
 data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
-us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% 
-    summarize(Daily_Deaths=max(Deaths)) %>% data.table
-us_deaths.dt$Cumulative_Deaths <- cumsum(us_deaths.dt$Daily_Deaths)
-print(paste('Total U.S. Deaths:', sum(us_deaths.dt$Daily_Deaths)))
+data.dt[data.dt$Confirmed%>%is.na, 'Confirmed'] <- 0
+
+country_cases.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
+    group_by(Last_Update) %>% 
+    summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %>% 
+    data.table
+
+# Make separate data table for confirmed, since it can be an order of magnitude
+# higher than recovered/death reports.
+country_confirmed.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
+    group_by(Last_Update) %>% 
+    summarize(Confirmed=max(Confirmed)) %>% data.table
 ```
 
 
 ## Our First Plot
-```{r plot-deaths}
-melted.dt <- melt(us_deaths.dt, id.vars='Last_Update', variable.name = 'Deaths')
-
-ggplot(melted.dt, aes(x=Last_Update, y=value)) +
+```{r plot-cases}
+melted.dt <- melt(country_confirmed.dt, id.vars='Last_Update', variable.name = 'Cases', 
+                  value.name='Number.Reported')
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
     geom_point() + 
-    geom_line() + 
-    facet_wrap('Deaths')
+    geom_line()
+
+
+melted.dt <- melt(country_cases.dt, id.vars='Last_Update', variable.name = 'Cases', 
+                  value.name='Number.Reported')
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
+    geom_point() + 
+    geom_line()
 ```
 
     
