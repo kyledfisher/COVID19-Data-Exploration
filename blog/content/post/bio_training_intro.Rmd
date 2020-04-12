@@ -25,9 +25,9 @@ Of particular interest to us is the spatial location data, meaning that we too
 can generate our own maps from these data.  Thanks to Kelsey for the original 
 share!
          
-2. The entire dataset is conveniently located on [*GitHub*](https://github.com/CSSEGISandData/COVID-19), updated daily, and is entirely 
-contained within comma-separated-values files (.csv files).  Many modern 
-programming languages,including R and Python, have libraries or packages that 
+2. The entire dataset is conveniently located on [*GitHub*](https://github.com/CSSEGISandData/COVID-19), 
+updated daily, and is entirely contained within comma-separated-values files (.csv files).  
+Many modern programming languages,including R and Python, have libraries or packages that 
 interface well with .csv files, making it a breeze to ingest, manipulate, and 
 analyze the data within!
 
