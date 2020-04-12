@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the Bio-Group Development Series"
 author: "Zach"
-date: "2020-03-30"
+date: "2020-03-30T22:00:00"
 output: html_document
 ---
     
@@ -32,7 +32,7 @@ interface well with .csv files, making it a breeze to ingest, manipulate, and
 analyze the data within!
                                                              
                                                              
-In the next post, [*Data Download and Sanitation*](https://bioanalytics-cvo-quantumspatial.netlify.com/2020/03/30/data-download-and-sanitation-and-our-first-plot/), 
+In the next post, [*Data Download and Sanitation*](https://bioanalytics-cvo-quantumspatial.netlify.com/2020/03/30/data-download-and-sanitation-and-our-first-plot), 
 we will walk through the initial setup of this project, which includes dowloading, cleaning, and organizing the data, and we will finish bygenerating a plot of the daily mortality rate in the U.S. as well as the total 
 to-date U.S. recovery count.  This document is in a format known as [*R Markdown*](https://rmarkdown.rstudio.com/),
 which allows us to easily run each code chunk one at a time.  The code is 
@@ -44,4 +44,4 @@ grow our knowledge and skillsets to better ourselves and our communities!
 
 This blog will serve as a summary of our development sessions, as well as a resource
 hub for futher information on the topics we cover.  Have fun, and 
-[*let's get to it!*](https://bioanalytics-cvo-quantumspatial.netlify.com/2020/03/30/data-download-and-sanitation-and-our-first-plot/) 
+[*let's get to it!*](https://bioanalytics-cvo-quantumspatial.netlify.com/2020/03/30/data-download-and-sanitation-and-our-first-plot) 
