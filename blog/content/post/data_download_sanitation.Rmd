@@ -136,7 +136,7 @@ To answer this question, we are going to make a few simple plots to visually see
 how the number of confirmed COVID-19 cases, the number of reported deaths due to
 the virus, and the number of reported cases have changed over time.
 
-### Replace NA's
+### Replace NA's with zeros
 It is often convenient to replace NA values in a dataset with zeros, since NA 
 values in R (as well as other programming languages) can have weird or behavior 
 that may be different from what you are expecting (e.g. summing values in
@@ -166,10 +166,10 @@ These 4 lines make heavy use of %>%', which is the piping operator from the
 **magrittr** library, which conveniently allows us to string together multiple
 operations in a single step.  In the 4 lines below we:
 
-    1. SELECT from the dataset only the rows that match our country of interest.
-    2. GROUP the selected rows by their date (to get a chronological timeline of
-       the number of cases in each category).
-    3. SUMMARIZE all the obersvations (i.e. rows) for each date into a single value
+1. SELECT from the dataset only the rows that match our country of interest.
+2. GROUP the selected rows by their date (to get a chronological timeline of
+   the number of cases in each category).
+3. SUMMARIZE all the obersvations (i.e. rows) for each date into a single value.
        We take only the maximum value reported for each day, since that will reflect
        the number of reported confirmed cases/deaths/recoveries for that day.
        
@@ -211,7 +211,7 @@ Here, we show the number of reported deaths and recoveries each day for our coun
 of interest.  Notice how different are the maximum values in the y-column s between
 this plot and the first one.  This is why it was convenient to split them up this way,
 otherwise these two plots would be very small and hard to read!
-```
+```{r plot-cases}
 melted.dt <- melt(country_cases.dt, id.vars='Last_Update', variable.name = 'Cases', 
                   value.name='Number.Reported')
 ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
@@ -222,7 +222,9 @@ ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
     
 
 # Further reading
-* [*Data tables*]https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html in R
+See the following links for information on the following topics:
+
+* [*Data tables*](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) in R
 
 
 * [*R for Data Science*](https://r4ds.had.co.nz/).  An excellent resource for those

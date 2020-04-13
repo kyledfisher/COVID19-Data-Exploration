@@ -182,8 +182,8 @@ of confirmed cases, reported deaths, and reported recoveries?”</p>
 <p>To answer this question, we are going to make a few simple plots to visually see
 how the number of confirmed COVID-19 cases, the number of reported deaths due to
 the virus, and the number of reported cases have changed over time.</p>
-<div id="replace-nas" class="section level3">
-<h3>Replace NA’s</h3>
+<div id="replace-nas-with-zeros" class="section level3">
+<h3>Replace NA’s with zeros</h3>
 <p>It is often convenient to replace NA values in a dataset with zeros, since NA
 values in R (as well as other programming languages) can have weird or behavior
 that may be different from what you are expecting (e.g. summing values in
@@ -245,13 +245,14 @@ the chunks of our data that we are interested in.</p>
 <p>These 4 lines make heavy use of %&gt;%’, which is the piping operator from the
 <strong>magrittr</strong> library, which conveniently allows us to string together multiple
 operations in a single step. In the 4 lines below we:</p>
-<pre><code>1. SELECT from the dataset only the rows that match our country of interest.
-2. GROUP the selected rows by their date (to get a chronological timeline of
-   the number of cases in each category).
-3. SUMMARIZE all the obersvations (i.e. rows) for each date into a single value
-   We take only the maximum value reported for each day, since that will reflect
-   the number of reported confirmed cases/deaths/recoveries for that day.
-   </code></pre>
+<ol style="list-style-type: decimal">
+<li>SELECT from the dataset only the rows that match our country of interest.</li>
+<li>GROUP the selected rows by their date (to get a chronological timeline of
+the number of cases in each category).</li>
+<li>SUMMARIZE all the obersvations (i.e. rows) for each date into a single value.
+We take only the maximum value reported for each day, since that will reflect
+the number of reported confirmed cases/deaths/recoveries for that day.</li>
+</ol>
 <pre class="r"><code>country_cases.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt;%  # SELECT country of interest
     group_by(Last_Update) %&gt;%   # GROUP by date
     summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %&gt;% # SUMMARIZE by max daily value 
@@ -390,16 +391,18 @@ ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported)) +
 of interest. Notice how different are the maximum values in the y-column s between
 this plot and the first one. This is why it was convenient to split them up this way,
 otherwise these two plots would be very small and hard to read!</p>
-<pre><code>melted.dt &lt;- melt(country_cases.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
+<pre class="r"><code>melted.dt &lt;- melt(country_cases.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
                   value.name=&#39;Number.Reported&#39;)
 ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
     geom_point() + 
     geom_line()</code></pre>
+<p><img src="/post/data_download_sanitation_files/figure-html/plot-cases-1.png" width="672" /></p>
 </div>
 <div id="further-reading" class="section level1">
 <h1>Further reading</h1>
+<p>See the following links for information on the following topics:</p>
 <ul>
-<li><p>[<em>Data tables</em>]<a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a> in R</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><em>Data tables</em></a> in R</p></li>
 <li><p><a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>. An excellent resource for those
 who want to delve into other data sets on their own, learning data analysis from
 the ground up in R. Accessible to all levels of experience!</p></li>
