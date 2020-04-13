@@ -28,13 +28,6 @@ library(ggplot2)
 ```
 
 
-## Set Country Name
-Setting this line allows us to easily switch between countries.
-```{r country-switch}
-# Choose country to look at
-country.switch <- 'France'
-```
-
 ## Set paths
 This line is purely procedural.  Here we tell R in a platform-agnostic way where 
 to put on your computer the downloaded csv data as well as the R scripts.  In 
@@ -48,12 +41,11 @@ git.path <- Sys.getenv('HOME')  # Where the base COVID19-Data-Exploration folder
 ## Fetching the CSV data from Github
 Here's where we start to get our hands dirty.  In the 3 code chunks below, we 
 first download the Github webpage that has all of the csv files in it and extract 
-the text (*scrape-webpage*).  Second, we look through all of that text for any
+the text  Second, we look through all of that text for any
 string of characters in the date format YYYY-MM-DD, since that is the naming 
-convention for all of the csv files, and make a list of those dates (*parse-dates*).  
+convention for all of the csv files, and make a list of those dates.  
 Finally, we use the list of dates (corresponding to the names of the csv files)
-to download the raw comma-separated data and save it locally to our computer 
-(*fetch-data*).
+to download the raw comma-separated data and save it locally to our computer.
 
 ```{r scrape-webpage}
 # Pull in list of daily data. 
@@ -102,14 +94,15 @@ motif in data science and, once you get the hang of it, is a quite intuitive and
 useful way to handle your data!
 
 ```{r trim-func}
-# trim whitespace and any trailing digits
+# trim whitespace and any trailing digits.  Used to set up the file timestamps
+# to easily organize the data by day.
 trim <- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
 ```
 
 ```{r tidy-up}
-data.dt <- lapply(dates.list, function(x) {  # Split
+data.dt <- lapply(dates.list, function(x) {  # SPLIT  up dates.list into chunks.
     
-    # -- Apply -- #
+    # -- APPLY -- #
     # Fix column names and standardize date formats
     tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
     colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
@@ -126,32 +119,81 @@ data.dt <- lapply(dates.list, function(x) {  # Split
             message(paste('Error!  Check file', x))
         }
     )
-    # -- End of Apply -- #
+    # -- End of APPLY -- #
     
-}) %>% rbindlist(fill=TRUE) # Combine
+}) %>% rbindlist(fill=TRUE) # COMBINE all the file chunks into a single data table.
 ```
 
 
 ## Filtering the Dataset
-```{r filter-by-US}
-data.dt[data.dt$Recovered%>%is.na, 'Recovered'] <- 0
-data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
+Now that we have the dataset downloaded and organized in a way that is easy to work with 
+(i.e. a single combined data table), we can now think of questions that we want to
+answer using the data.  This is an early step in the exploratory data analysis phase.
+A first probing question may be, "For our country of interest, what are the number 
+of confirmed cases, reported deaths, and reported recoveries?"
+
+To answer this question, we are going to make a few simple plots to visually see
+how the number of confirmed COVID-19 cases, the number of reported deaths due to
+the virus, and the number of reported cases have changed over time.
+
+### Replace NA's in our columns of interest with zeros.  It is often convenient to
+do this, since NA values in R (as well as other programming languages) can have
+weird or differing behavior from what you would expect (e.g. summing values in
+column that has an NA in it will return NA).
+```{r replace-NAs}
 data.dt[data.dt$Confirmed%>%is.na, 'Confirmed'] <- 0
+data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
+data.dt[data.dt$Recovered%>%is.na, 'Recovered'] <- 0
 
-country_cases.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
-    group_by(Last_Update) %>% 
-    summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %>% 
+data.dt
+```
+
+### Select Country
+Choose country to look at.  We are using Italy here because it is more easy
+to verify our results with those reported by the CSSE data dashboard.
+```{r country-switch}
+country.switch <- 'Italy'
+```
+
+### Filter by country, group by day, and summarize
+This is our first step where we really start to manipulate the data to answer our
+question of interest.  All of the organizing we did to our data before this was so
+that we can use these powerful filtering, grouping and summarizing tools to select
+the chunks of our data that we are interested in. 
+
+These 4 lines make heavy use of %>%', which is the piping operator from the 
+**magrittr** library, which conveniently allows us to string together multiple
+operations in a single step.  In the 4 lines below we:
+    1. SELECT from the dataset only the rows that match our country of interest.
+    2. GROUP the selected rows by their date (to get a chronological timeline of
+       the number of cases in each category).
+    3. SUMMARIZE all the obersvations (i.e. rows) for each date into a single value
+       We take only the maximum value reported for each day, since that will reflect
+       the number of reported confirmed cases/deaths/recoveries for that day.
+```{r filter-group-summarize}
+country_cases.dt <- data.dt[data.dt$Country_Region==country.switch,] %>%  # SELECT country of interest
+    group_by(Last_Update) %>%   # GROUP by date
+    summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %>% # SUMMARIZE by max daily value 
     data.table
+country_cases.dt
+```
 
-# Make separate data table for confirmed, since it can be an order of magnitude
-# higher than recovered/death reports.
+Here, we make separate data table for confirmed cases, since they are up to an 
+order of magnitude higher than recovered/death reports.  Visually it is easier to 
+distinguish the plots if they are separated, since if all 3 were on the same plot
+the plots for recovered/deaths would be very small compared to the number of confirmed
+cases.
+```{r filter-group-summarize-confirmed}
 country_confirmed.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
     group_by(Last_Update) %>% 
     summarize(Confirmed=max(Confirmed)) %>% data.table
+country_confirmed.dt
 ```
 
 
 ## Our First Plot
+Finally, let us plot the data!  Here we make use of the **ggplot2** library to
+plot our data.
 ```{r plot-cases}
 melted.dt <- melt(country_confirmed.dt, id.vars='Last_Update', variable.name = 'Cases', 
                   value.name='Number.Reported')
@@ -169,3 +211,8 @@ ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
 
     
 
+# Further reading
+[*Data tables*]https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html in R
+[*R for Data Science*](https://r4ds.had.co.nz/).  An excellent resource for those
+who want to delve into other data sets on their own, learning data analysis from 
+the ground up in R.  Accessible to all levels of experience!
