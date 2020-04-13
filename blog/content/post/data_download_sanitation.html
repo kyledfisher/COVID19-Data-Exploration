@@ -245,64 +245,11 @@ country_cases.dt</code></pre>
 order of magnitude higher than recovered/death reports. Visually it is easier to
 distinguish the plots if they are separated, since if all 3 were on the same plot
 the plots for recovered/deaths would be very small compared to the number of confirmed
-cases.</p>
+cases. The steps are the same we just did for the previous data.table</p>
 <pre class="r"><code>country_confirmed.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt;% 
     group_by(Last_Update) %&gt;% 
-    summarize(Confirmed=max(Confirmed)) %&gt;% data.table
-country_confirmed.dt</code></pre>
-<pre><code>##     Last_Update Confirmed
-##  1:  2020-01-31         2
-##  2:  2020-02-07         3
-##  3:  2020-02-21        20
-##  4:  2020-02-22        62
-##  5:  2020-02-23       155
-##  6:  2020-02-24       229
-##  7:  2020-02-25       322
-##  8:  2020-02-26       453
-##  9:  2020-02-27       655
-## 10:  2020-02-28       888
-## 11:  2020-02-29      1128
-## 12:  2020-03-01      1694
-## 13:  2020-03-02      2036
-## 14:  2020-03-03      2502
-## 15:  2020-03-04      3089
-## 16:  2020-03-05      3858
-## 17:  2020-03-06      4636
-## 18:  2020-03-07      5883
-## 19:  2020-03-08      7375
-## 20:  2020-03-09      9172
-## 21:  2020-03-10     10149
-## 22:  2020-03-11     17660
-## 23:  2020-03-14     24747
-## 24:  2020-03-16     27980
-## 25:  2020-03-17     31506
-## 26:  2020-03-18     35713
-## 27:  2020-03-19     41035
-## 28:  2020-03-20     47021
-## 29:  2020-03-21     53578
-## 30:  2020-03-22     59138
-## 31:  2020-03-23     63927
-## 32:  2020-03-24     69176
-## 33:  2020-03-25     74386
-## 34:  2020-03-26     80589
-## 35:  2020-03-27     86498
-## 36:  2020-03-28     92472
-## 37:  2020-03-29     97689
-## 38:  2020-03-30    101739
-## 39:  2020-03-31    105792
-## 40:  2020-04-01    110574
-## 41:  2020-04-02    115242
-## 42:  2020-04-03    119827
-## 43:  2020-04-04    124632
-## 44:  2020-04-05    128948
-## 45:  2020-04-06    132547
-## 46:  2020-04-07    135586
-## 47:  2020-04-08    139422
-## 48:  2020-04-09    143626
-## 49:  2020-04-10    147577
-## 50:  2020-04-11    152271
-## 51:  2020-04-12    156363
-##     Last_Update Confirmed</code></pre>
+    summarize(Confirmed=max(Confirmed)) %&gt;% 
+    data.table</code></pre>
 </div>
 </div>
 <div id="our-first-plots" class="section level2">

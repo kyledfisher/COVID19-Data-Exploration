@@ -185,12 +185,12 @@ Here, we make separate data table for confirmed cases, since they are up to an
 order of magnitude higher than recovered/death reports.  Visually it is easier to 
 distinguish the plots if they are separated, since if all 3 were on the same plot
 the plots for recovered/deaths would be very small compared to the number of confirmed
-cases.
+cases.  The steps are the same we just did for the previous data.table
 ```{r filter-group-summarize-confirmed}
 country_confirmed.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
     group_by(Last_Update) %>% 
-    summarize(Confirmed=max(Confirmed)) %>% data.table
-country_confirmed.dt
+    summarize(Confirmed=max(Confirmed)) %>% 
+    data.table
 ```
 
 
