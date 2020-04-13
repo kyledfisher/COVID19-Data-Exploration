@@ -4,14 +4,16 @@ author: "Zach"
 date: "2020-03-30"
 output: html_document
 ---
-    
-    
-# March 30, 2020
-Hello, and welcome to a summary the first training session for bio-group technical
-development!  This is an Rmarkdown document that will walk you through what we 
-did in the first session on March 30, 2020.
+
+# Welcome!
+Hello everyone, and welcome to the website for the Bio-Group Development Series!  Here we 
+will publish blog posts related to the various Monday-evening trainings as well
+as resources for you to further delve into to the topics covered.  In this first
+set of trainings, we are looking at some data on the spread of COVID-19 virus, as
+explained below
 
 
+# COVID-19 Dataset
 With the myriad statistics of the novel coronavirus pervading most media outlets, 
 we opted to examine the data ourselves to obtain a clearer understanding of the 
 spread of the disease.  We opted to use the dataset maintained bythe Johns Hopkins 
@@ -42,6 +44,8 @@ dataset and generating animated heatmaps of infections/deaths/recoveries over ti
 Together, hopefully we will create some meaning from this unique situation and 
 grow our knowledge and skillsets to better ourselves and our communities! 
 
-This blog will serve as a summary of our development sessions, as well as a resource
-hub for futher information on the topics we cover.  Have fun, and 
+As mentioned before, this blog will serve as a summary of our development sessions, 
+as well as a resource hub for futher information on the topics we cover.  It will
+be updated contiunally, so be sure to check back in from time to time for updates.
+So, have fun, and 
 [*let's get to it!*](https://bioanalytics-cvo-quantumspatial.netlify.com/2020/03/30/data-download-and-sanitation-and-our-first-plot) 

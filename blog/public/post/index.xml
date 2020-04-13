@@ -17,7 +17,8 @@
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/03/30/data-download-and-sanitation-and-our-first-plot/</guid>
-      <description>Libraries At the top of any script we write, first we include all the libraries used in this analysis. These “libraries” are packages of code that we import to our script so we may use some of their handy features. For example, the xml2 library allows us to download a webpage and extract all of the text from it in just a few simple lines of code! A few commonly used libraries include data.</description>
+      <description>March 30, 2020 Hello, and welcome to a summary of the first training session for bio-group technical development! This is an Rmarkdown document that will walk you through what we did in the first session on March 30, 2020. Here we will download the data from the
+Libraries At the top of any script we write, first we include all the libraries used in this analysis. These “libraries” are packages of code that we import to our script so we may use some of their handy features.</description>
     </item>
     
     <item>
@@ -26,8 +27,8 @@
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/03/30/welcome-to-the-bio-group-development-series/</guid>
-      <description>March 30, 2020 Hello, and welcome to a summary the first training session for bio-group technical development! This is an Rmarkdown document that will walk you through what we did in the first session on March 30, 2020.
-With the myriad statistics of the novel coronavirus pervading most media outlets, we opted to examine the data ourselves to obtain a clearer understanding of the spread of the disease. We opted to use the dataset maintained bythe Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE), for two main reasons:</description>
+      <description>Welcome! Hello everyone, and welcome to the website for the Bio-Group Development Series! Here we will publish blog posts related to the various Monday-evening trainings as well as resources for you to further delve into to the topics covered. In this first set of trainings, we are looking at some data on the spread of COVID-19 virus, as explained below
+ COVID-19 Dataset With the myriad statistics of the novel coronavirus pervading most media outlets, we opted to examine the data ourselves to obtain a clearer understanding of the spread of the disease.</description>
     </item>
     
   </channel>
