@@ -64,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">9 min read</span>
+    <span class="article-duration">10 min read</span>
     
 
     <h1 class="article-title">Data Download and Sanitation (and our first plot!)</h1>
@@ -182,10 +182,11 @@ of confirmed cases, reported deaths, and reported recoveries?”</p>
 <p>To answer this question, we are going to make a few simple plots to visually see
 how the number of confirmed COVID-19 cases, the number of reported deaths due to
 the virus, and the number of reported cases have changed over time.</p>
-<div id="replace-nas-in-our-columns-of-interest-with-zeros.-it-is-often-convenient-to" class="section level3">
-<h3>Replace NA’s in our columns of interest with zeros. It is often convenient to</h3>
-<p>do this, since NA values in R (as well as other programming languages) can have
-weird or differing behavior from what you would expect (e.g. summing values in
+<div id="replace-nas" class="section level3">
+<h3>Replace NA’s</h3>
+<p>It is often convenient to replace NA values in a dataset with zeros, since NA
+values in R (as well as other programming languages) can have weird or behavior
+that may be different from what you are expecting (e.g. summing values in
 column that has an NA in it will return NA).</p>
 <pre class="r"><code>data.dt[data.dt$Confirmed%&gt;%is.na, &#39;Confirmed&#39;] &lt;- 0
 data.dt[data.dt$Deaths%&gt;%is.na, &#39;Deaths&#39;] &lt;- 0
@@ -243,17 +244,18 @@ that we can use these powerful filtering, grouping and summarizing tools to sele
 the chunks of our data that we are interested in.</p>
 <p>These 4 lines make heavy use of %&gt;%’, which is the piping operator from the
 <strong>magrittr</strong> library, which conveniently allows us to string together multiple
-operations in a single step. In the 4 lines below we:
-1. SELECT from the dataset only the rows that match our country of interest.
+operations in a single step. In the 4 lines below we:</p>
+<pre><code>1. SELECT from the dataset only the rows that match our country of interest.
 2. GROUP the selected rows by their date (to get a chronological timeline of
-the number of cases in each category).
-3. SUMMARIZE all the obersvations (i.e. rows) for each date into a single value
-We take only the maximum value reported for each day, since that will reflect
-the number of reported confirmed cases/deaths/recoveries for that day.</p>
+   the number of cases in each category).
+3. SUMMARIZE all the obersvations (i.e. rows) for each date into a single value
+   We take only the maximum value reported for each day, since that will reflect
+   the number of reported confirmed cases/deaths/recoveries for that day.
+   </code></pre>
 <pre class="r"><code>country_cases.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt;%  # SELECT country of interest
     group_by(Last_Update) %&gt;%   # GROUP by date
     summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %&gt;% # SUMMARIZE by max daily value 
-    data.table
+    data.table  # Ensure the data table remains a data table
 country_cases.dt</code></pre>
 <pre><code>##     Last_Update Recovered Deaths
 ##  1:  2020-01-31         0      0
@@ -372,29 +374,36 @@ country_confirmed.dt</code></pre>
 ##     Last_Update Confirmed</code></pre>
 </div>
 </div>
-<div id="our-first-plot" class="section level2">
-<h2>Our First Plot</h2>
+<div id="our-first-plots" class="section level2">
+<h2>Our First Plots</h2>
 <p>Finally, let us plot the data! Here we make use of the <strong>ggplot2</strong> library to
-plot our data.</p>
+plot our data. In this first plot, we show the number of reported cases (y-axis)
+over time (x-axis). Again, the plot is showing the maximum number of reported
+cases each day since Jan. 22, 2020 for our country of interest.</p>
 <pre class="r"><code>melted.dt &lt;- melt(country_confirmed.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
                   value.name=&#39;Number.Reported&#39;)
 ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported)) +
     geom_point() + 
     geom_line()</code></pre>
-<p><img src="/post/data_download_sanitation_files/figure-html/plot-cases-1.png" width="672" /></p>
-<pre class="r"><code>melted.dt &lt;- melt(country_cases.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
+<p><img src="/post/data_download_sanitation_files/figure-html/plot-confirmed-1.png" width="672" /></p>
+<p>Here, we show the number of reported deaths and recoveries each day for our country
+of interest. Notice how different are the maximum values in the y-column s between
+this plot and the first one. This is why it was convenient to split them up this way,
+otherwise these two plots would be very small and hard to read!</p>
+<pre><code>melted.dt &lt;- melt(country_cases.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
                   value.name=&#39;Number.Reported&#39;)
 ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
     geom_point() + 
     geom_line()</code></pre>
-<p><img src="/post/data_download_sanitation_files/figure-html/plot-cases-2.png" width="672" /></p>
 </div>
 <div id="further-reading" class="section level1">
 <h1>Further reading</h1>
-<p>[<em>Data tables</em>]<a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a> in R
-<a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>. An excellent resource for those
+<ul>
+<li><p>[<em>Data tables</em>]<a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a> in R</p></li>
+<li><p><a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>. An excellent resource for those
 who want to delve into other data sets on their own, learning data analysis from
-the ground up in R. Accessible to all levels of experience!</p>
+the ground up in R. Accessible to all levels of experience!</p></li>
+</ul>
 </div>
 
     </div>
