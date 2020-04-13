@@ -81,10 +81,10 @@
 <h2>Libraries</h2>
 <p>At the top of any script we write, first we include all the libraries used in this
 analysis. These “libraries” are packages of code that we import to our script
-so we may use some of their handy features. For example, the “xml2” library allows
+so we may use some of their handy features. For example, the <strong>xml2</strong> library allows
 us to download a webpage and extract all of the text from it in just a few simple
-lines of code! A few commonly used libraries include data.table, dplyr, and
-magrittr, all of which we will go into later.</p>
+lines of code! A few commonly used libraries include <strong>data.table</strong>, <strong>dplyr</strong>, and
+<strong>magrittr</strong>, all of which we will go into later.</p>
 <pre class="r"><code>library(magrittr)
 library(xml2)
 library(lubridate)
@@ -199,7 +199,7 @@ country_confirmed.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt
 <h2>Our First Plot</h2>
 <pre class="r"><code>melted.dt &lt;- melt(country_confirmed.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
                   value.name=&#39;Number.Reported&#39;)
-ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported)) +
     geom_point() + 
     geom_line()</code></pre>
 <p><img src="/post/data_download_sanitation_files/figure-html/plot-cases-1.png" width="672" /></p>

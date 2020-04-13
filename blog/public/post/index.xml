@@ -17,7 +17,7 @@
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/03/30/data-download-and-sanitation-and-our-first-plot/</guid>
-      <description>Libraries At the top of any script we write, first we include all the libraries used in this analysis. These “libraries” are packages of code that we import to our script so we may use some of their handy features. For example, the “xml2” library allows us to download a webpage and extract all of the text from it in just a few simple lines of code! A few commonly used libraries include data.</description>
+      <description>Libraries At the top of any script we write, first we include all the libraries used in this analysis. These “libraries” are packages of code that we import to our script so we may use some of their handy features. For example, the xml2 library allows us to download a webpage and extract all of the text from it in just a few simple lines of code! A few commonly used libraries include data.</description>
     </item>
     
     <item>
