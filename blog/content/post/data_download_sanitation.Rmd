@@ -14,10 +14,10 @@ knitr::opts_chunk$set(message=FALSE)
 ## Libraries
 At the top of any script we write, first we include all the libraries used in this
 analysis.   These "libraries" are packages of code that we import to our script 
-so we may use some of their handy features.  For example, the "xml2" library allows
+so we may use some of their handy features.  For example, the **xml2** library allows
 us to download a webpage and extract all of the text from it in just a few simple
-lines of code!  A few commonly used libraries include data.table, dplyr, and 
-magrittr, all of which we will go into later.
+lines of code!  A few commonly used libraries include **data.table**, **dplyr**, and 
+**magrittr**, all of which we will go into later.
 ```{r libraries}
 library(magrittr)
 library(xml2)
@@ -155,7 +155,7 @@ country_confirmed.dt <- data.dt[data.dt$Country_Region==country.switch,] %>%
 ```{r plot-cases}
 melted.dt <- melt(country_confirmed.dt, id.vars='Last_Update', variable.name = 'Cases', 
                   value.name='Number.Reported')
-ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported)) +
     geom_point() + 
     geom_line()
 
