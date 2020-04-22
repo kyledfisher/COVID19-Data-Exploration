@@ -1,0 +1,240 @@
+---
+title: "Data Download and Sanitation (and our first plot!)"
+author: "Zach"
+date: "2020-03-30"
+output: html_document
+---
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(message=FALSE)
+```
+
+# March 30, 2020
+Hello, and welcome to a summary of the first training session for bio-group technical
+development!  This is an Rmarkdown document that will walk you through what we 
+did in the first session on March 30, 2020.  Here we will download the data from the
+[*JHU CSSE database*](https://github.com/CSSEGISandData/COVID-19) and plot the
+reported confirmed cases, deaths, and recoveries for a country of interest
+since January 22, 2020.
+
+
+## Libraries
+At the top of any script we write, first we include all the libraries used in this
+analysis.   These "libraries" are packages of code that we import to our script 
+so we may use some of their handy features.  For example, the **xml2** library allows
+us to download a webpage and extract all of the text from it in just a few simple
+lines of code!  A few commonly used libraries include **data.table**, **dplyr**, and 
+**magrittr**, all of which we will go into later.
+```{r libraries}
+library(magrittr)
+library(xml2)
+library(lubridate)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+```
+
+
+## Set paths
+This line is purely procedural.  Here we tell R in a platform-agnostic way where 
+to put on your computer the downloaded csv data as well as the R scripts.  In 
+other words, R makes a guess at where your home directory is, regardless of whether
+you are using Windows, MacOS, or Linux.
+```{r set-paths}
+git.path <- Sys.getenv('HOME')  # Where the base COVID19-Data-Exploration folder lives.
+```
+
+
+## Fetching the CSV data from Github
+Here's where we start to get our hands dirty.  In the 3 code chunks below, we 
+first download the Github webpage that has all of the csv files in it and extract 
+the text  Second, we look through all of that text for any
+string of characters in the date format YYYY-MM-DD, since that is the naming 
+convention for all of the csv files, and make a list of those dates.  
+Finally, we use the list of dates (corresponding to the names of the csv files)
+to download the raw comma-separated data and save it locally to our computer.
+
+```{r scrape-webpage}
+# Pull in list of daily data. 
+xml.path <- 'https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports'
+report.file <- download_html(xml.path)
+html.read <- read_html(report.file)
+csv.list <- xml_text(html.read) %>% strsplit(split='\\n') %>% unlist
+```
+
+```{r parse-dates}
+parse_dates.fn <- function(csv.list) {
+    # Parse html for the csv names
+    dates.list <- lapply(csv.list, function(x) {
+    if (grepl(pattern='.csv', x, fixed=TRUE)) { 
+        regex <- regexpr('\\d{2}-\\d{2}-\\d{4}.csv', x)
+        return(substr(x, start=regex[[1]], stop=regex[[1]]+attr(regex, 'match.length')))
+        }
+    })
+    
+    return(dates.list)
+}
+
+dates.list <- parse_dates.fn(csv.list)
+dates.list[sapply(dates.list, is.null)] <- NULL  # Drop null values in list
+curr_csvs.list <- list.files(paste0(git.path, '/Code/COVID19-Data-Exploration/data/'))
+```
+
+```{r fetch-data}
+# Fetch raw csv data
+raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
+suppress <- lapply(dates.list, function(x, raw.path) {
+    if (!(x %in% curr_csvs.list))  # Only download most recent csv
+        download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
+}, raw.path)
+```
+
+
+## Data Sanitization -- Making our Data Tidy
+Now that we have our data downloaded, we are ready to do some analysis, right?  
+Yes, but only if our data are in the right format.  In R, making one's data "tidy"
+doesn't just mean it is clean and neat in the general sense of those words; rather, 
+it means formatting one's data in a way that makes it easy to split it up into 
+small chunks, apply a set of operations to each chunk, and then recombine the 
+chunks back into a new dataset.  This split-apply-combine approach is a common
+motif in data science and, once you get the hang of it, is a quite intuitive and
+useful way to handle your data!
+
+```{r trim-func}
+# trim whitespace and any trailing digits.  Used to set up the file timestamps
+# to easily organize the data by day.
+trim <- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
+```
+
+```{r tidy-up}
+data.dt <- lapply(dates.list, function(x) {  # SPLIT  up dates.list into chunks.
+    
+    # -- APPLY -- #
+    # Fix column names and standardize date formats
+    tmp.dt <- fread(paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x)) %>% data.table
+    colnames(tmp.dt) <- colnames(tmp.dt) %>% gsub('[ \\/]', '_', .)  # sub spaces and slashes for underscore
+    # Fix date formatting for first 10 days
+    tryCatch({
+        tmp.dt$Last_Update <- tmp.dt$Last_Update %>% 
+            trim %>% 
+            parse_date_time(orders=c('%m/%d/%y','%m/%d/%Y','%Y-%m-%d'))
+        return(tmp.dt)},
+        warning = function(w) {
+            message(paste('Warning!  Check file:', x))
+        },
+        error = function(e) {
+            message(paste('Error!  Check file', x))
+        }
+    )
+    # -- End of APPLY -- #
+    
+}) %>% rbindlist(fill=TRUE) # COMBINE all the file chunks into a single data table.
+```
+
+
+## Filtering the Dataset
+Now that we have the dataset downloaded and organized in a way that is easy to work with 
+(i.e. a single combined data table), we can now think of questions that we want to
+answer using the data.  This is an early step in the exploratory data analysis phase.
+A first probing question may be, "For our country of interest, what are the number 
+of confirmed cases, reported deaths, and reported recoveries?"
+
+To answer this question, we are going to make a few simple plots to visually see
+how the number of confirmed COVID-19 cases, the number of reported deaths due to
+the virus, and the number of reported cases have changed over time.
+
+### Replace NA's with zeros
+It is often convenient to replace NA values in a dataset with zeros, since NA 
+values in R (as well as other programming languages) can have weird or behavior 
+that may be different from what you are expecting (e.g. summing values in
+column that has an NA in it will return NA).
+```{r replace-NAs}
+data.dt[data.dt$Confirmed%>%is.na, 'Confirmed'] <- 0
+data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
+data.dt[data.dt$Recovered%>%is.na, 'Recovered'] <- 0
+
+data.dt
+```
+
+### Select Country
+Choose country to look at.  We are using Italy here because it is more easy
+to verify our results with those reported by the CSSE data dashboard.
+```{r country-switch}
+country.switch <- 'Italy'
+```
+
+### Filter by country, group by day, and summarize
+This is our first step where we really start to manipulate the data to answer our
+question of interest.  All of the organizing we did to our data before this was so
+that we can use these powerful filtering, grouping and summarizing tools to select
+the chunks of our data that we are interested in. 
+
+These 4 lines make heavy use of %>%', which is the piping operator from the 
+**magrittr** library, which conveniently allows us to string together multiple
+operations in a single step.  In the 4 lines below we:
+
+1. SELECT from the dataset only the rows that match our country of interest.
+2. GROUP the selected rows by their date (to get a chronological timeline of
+   the number of cases in each category).
+3. SUMMARIZE all the observations (i.e. rows) for each date into a single value.
+       We take only the maximum value reported for each day, since that will reflect
+       the number of reported confirmed cases/deaths/recoveries for that day.
+       
+```{r filter-group-summarize}
+country_cases.dt <- data.dt[data.dt$Country_Region==country.switch,] %>%  # SELECT country of interest
+    group_by(Last_Update) %>%   # GROUP by date
+    summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %>% # SUMMARIZE by max daily value 
+    data.table  # Ensure the data table remains a data table
+country_cases.dt
+```
+
+Here, we make separate data table for confirmed cases, since they are up to an 
+order of magnitude higher than recovered/death reports.  Visually it is easier to 
+distinguish the plots if they are separated, since if all 3 were on the same plot
+the plots for recovered/deaths would be very small compared to the number of confirmed
+cases.  The steps are the same we just did for the previous data.table
+```{r filter-group-summarize-confirmed}
+country_confirmed.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
+    group_by(Last_Update) %>% 
+    summarize(Confirmed=max(Confirmed)) %>% 
+    data.table
+```
+
+
+## Our First Plots
+Finally, let us plot the data!  Here we make use of the **ggplot2** library to
+plot our data.  In this first plot, we show the number of reported cases (y-axis)
+over time (x-axis).  Again, the plot is showing the maximum number of reported
+cases each day since Jan. 22, 2020 for our country of interest.  
+```{r plot-confirmed}
+melted.dt <- melt(country_confirmed.dt, id.vars='Last_Update', variable.name = 'Cases', 
+                  value.name='Number.Reported')
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported)) +
+    geom_point() + 
+    geom_line()
+```
+
+Here, we show the number of reported deaths and recoveries each day for our country
+of interest.  Notice how different are the maximum values in the y-column s between
+this plot and the first one.  This is why it was convenient to split them up this way,
+otherwise these two plots would be very small and hard to read!
+```{r plot-cases}
+melted.dt <- melt(country_cases.dt, id.vars='Last_Update', variable.name = 'Cases', 
+                  value.name='Number.Reported')
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
+    geom_point() + 
+    geom_line()
+```
+
+    
+
+# Further reading
+See the following links for information on the following topics:
+
+* [*Data tables*](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) in R
+
+
+* [*R for Data Science*](https://r4ds.had.co.nz/).  An excellent resource for those
+who want to delve into other data sets on their own, learning data analysis from 
+the ground up in R.  Accessible to all levels of experience!

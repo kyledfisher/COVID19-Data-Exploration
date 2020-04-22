@@ -14,6 +14,9 @@ library(data.table)
 library(dplyr)
 library(ggplot2)
 
+# Choose country to look at
+country.switch <- 'France'
+
 # Set paths 
 git.path <- Sys.getenv('HOME')  # Where the base COVID19-Data-Exploration folder lives.
 
@@ -31,13 +34,14 @@ dates.list <- lapply(csv.list, function(x) {
     }
 })
 dates.list[sapply(dates.list, is.null)] <- NULL
-dates.list <- dates.list
+curr_csvs.list <- list.files(paste0(git.path, '/Code/COVID19-Data-Exploration/data/'))
 
 # Fetch raw csv data
 raw.path <- 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
-suppress <- lapply(dates.list, function(x, raw.path) {
-    download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
-}, raw.path)
+suppress <- lapply(dates.list, function(x, raw.path, curr_csvs.list) {
+    if (!(x %in% curr_csvs.list))  # Only download most recent csv
+        download.file(paste0(raw.path, x), paste0(git.path,'/Code/COVID19-Data-Exploration/data/',x))
+}, raw.path, curr_csvs.list)
 
 # trim whitespace and any trailing digits
 trim<- function(x) return(tstrsplit(x, "\\s|[A-Z]", keep=1) %>%unlist)
@@ -63,14 +67,31 @@ data.dt <- lapply(dates.list, function(x) {
     )
 }) %>% rbindlist(fill=TRUE)
 
+data.dt[data.dt$Recovered%>%is.na, 'Recovered'] <- 0
 data.dt[data.dt$Deaths%>%is.na, 'Deaths'] <- 0
-us_deaths.dt <- data.dt[data.dt$Country_Region=='US',] %>% group_by(Last_Update) %>% summarize(Daily_Deaths=max(Deaths)) %>% data.table
-us_deaths.dt$Cumulative_Deaths <- cumsum(us_deaths.dt$Daily_Deaths)
-sum(us_deaths.dt$Daily_Deaths)
+data.dt[data.dt$Confirmed%>%is.na, 'Confirmed'] <- 0
 
-melted.dt <- melt(us_deaths.dt, id.vars='Last_Update', variable.name = 'Deaths')
 
-ggplot(melted.dt, aes(x=Last_Update, y=value)) +
+country_cases.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
+    group_by(Last_Update) %>% 
+    summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %>% 
+    data.table
+
+# Make separate data table for confirmed, since it can be an order of magnitude
+# higher than recovered/death reports.
+country_confirmed.dt <- data.dt[data.dt$Country_Region==country.switch,] %>% 
+    group_by(Last_Update) %>% 
+    summarize(Confirmed=max(Confirmed)) %>% data.table
+
+melted.dt <- melt(country_confirmed.dt, id.vars='Last_Update', variable.name = 'Cases', 
+                  value.name='Number.Reported')
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
     geom_point() + 
-    geom_line() + 
-    facet_wrap('Deaths')
+    geom_line()
+
+
+melted.dt <- melt(country_cases.dt, id.vars='Last_Update', variable.name = 'Cases', 
+                  value.name='Number.Reported')
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
+    geom_point() + 
+    geom_line()

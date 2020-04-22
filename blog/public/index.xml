@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bio-Team Development</title>
+    <link>/</link>
+    <description>Recent content on Bio-Team Development</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Apr 2020 14:34:51 -0700</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Fri, 10 Apr 2020 14:34:51 -0700</pubDate>
+      
+      <guid>/about/</guid>
+      <description>This site will host the blogposts associated with the Bio-group Development Series sessions. The site theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+    </item>
+    
+    <item>
+      <title>Data Download and Sanitation (and our first plot!)</title>
+      <link>/2020/03/30/data-download-and-sanitation-and-our-first-plot/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/30/data-download-and-sanitation-and-our-first-plot/</guid>
+      <description>March 30, 2020 Hello, and welcome to a summary of the first training session for bio-group technical development! This is an Rmarkdown document that will walk you through what we did in the first session on March 30, 2020. Here we will download the data from the JHU CSSE database and plot the reported confirmed cases, deaths, and recoveries for a country of interest since January 22, 2020.
+Libraries At the top of any script we write, first we include all the libraries used in this analysis.</description>
+    </item>
+    
+    <item>
+      <title>Welcome to the Bio-Group Development Series</title>
+      <link>/2020/03/30/welcome-to-the-bio-group-development-series/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/30/welcome-to-the-bio-group-development-series/</guid>
+      <description>Welcome! Hello everyone, and welcome to the website for the Bio-Group Development Series! Here we will publish blog posts related to the various Monday-evening trainings as well as resources for you to further delve into to the topics covered. In this first set of trainings, we are looking at some data on the spread of COVID-19 virus, as explained below.
+ COVID-19 Dataset With the myriad statistics of the novel coronavirus pervading most media outlets, we opted to examine the data ourselves to obtain a clearer understanding of the spread of the disease.</description>
+    </item>
+    
+  </channel>
+</rss>

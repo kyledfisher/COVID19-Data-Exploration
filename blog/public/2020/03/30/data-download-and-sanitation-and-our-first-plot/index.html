@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.68.3" />
+
+
+<title>Data Download and Sanitation (and our first plot!) - Bio-Team Development</title>
+<meta property="og:title" content="Data Download and Sanitation (and our first plot!) - Bio-Team Development">
+
+
+  <link href='/QSI_NV5_logo.png' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/QSI_NV5_logo.png"
+         width="315"
+         height="128"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/H4estu/COVID19-Data-Exploration">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/QuantumSpatial">Twitter</a></li>
+    
+    <li><a href="https://quantumspatial.com">Website</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">9 min read</span>
+    
+
+    <h1 class="article-title">Data Download and Sanitation (and our first plot!)</h1>
+
+    
+    <span class="article-date">2020-03-30</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="march-30-2020" class="section level1">
+<h1>March 30, 2020</h1>
+<p>Hello, and welcome to a summary of the first training session for bio-group technical
+development! This is an Rmarkdown document that will walk you through what we
+did in the first session on March 30, 2020. Here we will download the data from the
+<a href="https://github.com/CSSEGISandData/COVID-19"><em>JHU CSSE database</em></a> and plot the
+reported confirmed cases, deaths, and recoveries for a country of interest
+since January 22, 2020.</p>
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<p>At the top of any script we write, first we include all the libraries used in this
+analysis. These “libraries” are packages of code that we import to our script
+so we may use some of their handy features. For example, the <strong>xml2</strong> library allows
+us to download a webpage and extract all of the text from it in just a few simple
+lines of code! A few commonly used libraries include <strong>data.table</strong>, <strong>dplyr</strong>, and
+<strong>magrittr</strong>, all of which we will go into later.</p>
+<pre class="r"><code>library(magrittr)
+library(xml2)
+library(lubridate)
+library(data.table)
+library(dplyr)
+library(ggplot2)</code></pre>
+</div>
+<div id="set-paths" class="section level2">
+<h2>Set paths</h2>
+<p>This line is purely procedural. Here we tell R in a platform-agnostic way where
+to put on your computer the downloaded csv data as well as the R scripts. In
+other words, R makes a guess at where your home directory is, regardless of whether
+you are using Windows, MacOS, or Linux.</p>
+<pre class="r"><code>git.path &lt;- Sys.getenv(&#39;HOME&#39;)  # Where the base COVID19-Data-Exploration folder lives.</code></pre>
+</div>
+<div id="fetching-the-csv-data-from-github" class="section level2">
+<h2>Fetching the CSV data from Github</h2>
+<p>Here’s where we start to get our hands dirty. In the 3 code chunks below, we
+first download the Github webpage that has all of the csv files in it and extract
+the text Second, we look through all of that text for any
+string of characters in the date format YYYY-MM-DD, since that is the naming
+convention for all of the csv files, and make a list of those dates.<br />
+Finally, we use the list of dates (corresponding to the names of the csv files)
+to download the raw comma-separated data and save it locally to our computer.</p>
+<pre class="r"><code># Pull in list of daily data. 
+xml.path &lt;- &#39;https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports&#39;
+report.file &lt;- download_html(xml.path)
+html.read &lt;- read_html(report.file)
+csv.list &lt;- xml_text(html.read) %&gt;% strsplit(split=&#39;\\n&#39;) %&gt;% unlist</code></pre>
+<pre class="r"><code>parse_dates.fn &lt;- function(csv.list) {
+    # Parse html for the csv names
+    dates.list &lt;- lapply(csv.list, function(x) {
+    if (grepl(pattern=&#39;.csv&#39;, x, fixed=TRUE)) { 
+        regex &lt;- regexpr(&#39;\\d{2}-\\d{2}-\\d{4}.csv&#39;, x)
+        return(substr(x, start=regex[[1]], stop=regex[[1]]+attr(regex, &#39;match.length&#39;)))
+        }
+    })
+    
+    return(dates.list)
+}
+
+dates.list &lt;- parse_dates.fn(csv.list)
+dates.list[sapply(dates.list, is.null)] &lt;- NULL  # Drop null values in list
+curr_csvs.list &lt;- list.files(paste0(git.path, &#39;/Code/COVID19-Data-Exploration/data/&#39;))</code></pre>
+<pre class="r"><code># Fetch raw csv data
+raw.path &lt;- &#39;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/&#39;
+suppress &lt;- lapply(dates.list, function(x, raw.path) {
+    if (!(x %in% curr_csvs.list))  # Only download most recent csv
+        download.file(paste0(raw.path, x), paste0(git.path,&#39;/Code/COVID19-Data-Exploration/data/&#39;,x))
+}, raw.path)</code></pre>
+</div>
+<div id="data-sanitization-making-our-data-tidy" class="section level2">
+<h2>Data Sanitization – Making our Data Tidy</h2>
+<p>Now that we have our data downloaded, we are ready to do some analysis, right?<br />
+Yes, but only if our data are in the right format. In R, making one’s data “tidy”
+doesn’t just mean it is clean and neat in the general sense of those words; rather,
+it means formatting one’s data in a way that makes it easy to split it up into
+small chunks, apply a set of operations to each chunk, and then recombine the
+chunks back into a new dataset. This split-apply-combine approach is a common
+motif in data science and, once you get the hang of it, is a quite intuitive and
+useful way to handle your data!</p>
+<pre class="r"><code># trim whitespace and any trailing digits.  Used to set up the file timestamps
+# to easily organize the data by day.
+trim &lt;- function(x) return(tstrsplit(x, &quot;\\s|[A-Z]&quot;, keep=1) %&gt;%unlist)</code></pre>
+<pre class="r"><code>data.dt &lt;- lapply(dates.list, function(x) {  # SPLIT  up dates.list into chunks.
+    
+    # -- APPLY -- #
+    # Fix column names and standardize date formats
+    tmp.dt &lt;- fread(paste0(git.path,&#39;/Code/COVID19-Data-Exploration/data/&#39;,x)) %&gt;% data.table
+    colnames(tmp.dt) &lt;- colnames(tmp.dt) %&gt;% gsub(&#39;[ \\/]&#39;, &#39;_&#39;, .)  # sub spaces and slashes for underscore
+    # Fix date formatting for first 10 days
+    tryCatch({
+        tmp.dt$Last_Update &lt;- tmp.dt$Last_Update %&gt;% 
+            trim %&gt;% 
+            parse_date_time(orders=c(&#39;%m/%d/%y&#39;,&#39;%m/%d/%Y&#39;,&#39;%Y-%m-%d&#39;))
+        return(tmp.dt)},
+        warning = function(w) {
+            message(paste(&#39;Warning!  Check file:&#39;, x))
+        },
+        error = function(e) {
+            message(paste(&#39;Error!  Check file&#39;, x))
+        }
+    )
+    # -- End of APPLY -- #
+    
+}) %&gt;% rbindlist(fill=TRUE) # COMBINE all the file chunks into a single data table.</code></pre>
+</div>
+<div id="filtering-the-dataset" class="section level2">
+<h2>Filtering the Dataset</h2>
+<p>Now that we have the dataset downloaded and organized in a way that is easy to work with
+(i.e. a single combined data table), we can now think of questions that we want to
+answer using the data. This is an early step in the exploratory data analysis phase.
+A first probing question may be, “For our country of interest, what are the number
+of confirmed cases, reported deaths, and reported recoveries?”</p>
+<p>To answer this question, we are going to make a few simple plots to visually see
+how the number of confirmed COVID-19 cases, the number of reported deaths due to
+the virus, and the number of reported cases have changed over time.</p>
+<div id="replace-nas-with-zeros" class="section level3">
+<h3>Replace NA’s with zeros</h3>
+<p>It is often convenient to replace NA values in a dataset with zeros, since NA
+values in R (as well as other programming languages) can have weird or behavior
+that may be different from what you are expecting (e.g. summing values in
+column that has an NA in it will return NA).</p>
+<pre class="r"><code>data.dt[data.dt$Confirmed%&gt;%is.na, &#39;Confirmed&#39;] &lt;- 0
+data.dt[data.dt$Deaths%&gt;%is.na, &#39;Deaths&#39;] &lt;- 0
+data.dt[data.dt$Recovered%&gt;%is.na, &#39;Recovered&#39;] &lt;- 0
+
+data.dt</code></pre>
+<pre><code>##         FIPS     Admin2 Province_State Country_Region Last_Update       Lat
+##     1: 45001  Abbeville South Carolina             US  2020-03-24  34.22333
+##     2: 22001     Acadia      Louisiana             US  2020-03-24  30.29506
+##     3: 51001   Accomack       Virginia             US  2020-03-24  37.76707
+##     4: 16001        Ada          Idaho             US  2020-03-24  43.45266
+##     5: 19001      Adair           Iowa             US  2020-03-24  41.33076
+##    ---                                                                     
+## 91571:    NA                           Western Sahara  2020-04-12  24.21550
+## 91572:    NA                                    Yemen  2020-04-12  15.55273
+## 91573:    NA                                   Zambia  2020-04-12 -13.13390
+## 91574:    NA                                 Zimbabwe  2020-04-12 -19.01544
+## 91575:    NA unassigned           Utah             US  2020-04-12        NA
+##             Long_ Confirmed Deaths Recovered Active
+##     1:  -82.46171         1      0         0      0
+##     2:  -92.41420         2      0         0      0
+##     3:  -75.63235         1      0         0      0
+##     4: -116.24155        19      0         0      0
+##     5:  -94.47106         1      0         0      0
+##    ---                                             
+## 91571:  -12.88580         6      0         0      6
+## 91572:   48.51639         1      0         0      1
+## 91573:   27.84933        43      2        30     11
+## 91574:   29.15486        14      3         0     11
+## 91575:         NA         4      5         0     -1
+##                         Combined_Key Latitude Longitude
+##     1: Abbeville, South Carolina, US       NA        NA
+##     2:         Acadia, Louisiana, US       NA        NA
+##     3:        Accomack, Virginia, US       NA        NA
+##     4:                Ada, Idaho, US       NA        NA
+##     5:               Adair, Iowa, US       NA        NA
+##    ---                                                 
+## 91571:                Western Sahara       NA        NA
+## 91572:                         Yemen       NA        NA
+## 91573:                        Zambia       NA        NA
+## 91574:                      Zimbabwe       NA        NA
+## 91575:          unassigned, Utah, US       NA        NA</code></pre>
+</div>
+<div id="select-country" class="section level3">
+<h3>Select Country</h3>
+<p>Choose country to look at. We are using Italy here because it is more easy
+to verify our results with those reported by the CSSE data dashboard.</p>
+<pre class="r"><code>country.switch &lt;- &#39;Italy&#39;</code></pre>
+</div>
+<div id="filter-by-country-group-by-day-and-summarize" class="section level3">
+<h3>Filter by country, group by day, and summarize</h3>
+<p>This is our first step where we really start to manipulate the data to answer our
+question of interest. All of the organizing we did to our data before this was so
+that we can use these powerful filtering, grouping and summarizing tools to select
+the chunks of our data that we are interested in.</p>
+<p>These 4 lines make heavy use of %&gt;%’, which is the piping operator from the
+<strong>magrittr</strong> library, which conveniently allows us to string together multiple
+operations in a single step. In the 4 lines below we:</p>
+<ol style="list-style-type: decimal">
+<li>SELECT from the dataset only the rows that match our country of interest.</li>
+<li>GROUP the selected rows by their date (to get a chronological timeline of
+the number of cases in each category).</li>
+<li>SUMMARIZE all the observations (i.e. rows) for each date into a single value.
+We take only the maximum value reported for each day, since that will reflect
+the number of reported confirmed cases/deaths/recoveries for that day.</li>
+</ol>
+<pre class="r"><code>country_cases.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt;%  # SELECT country of interest
+    group_by(Last_Update) %&gt;%   # GROUP by date
+    summarize(Recovered=max(Recovered),Deaths=max(Deaths)) %&gt;% # SUMMARIZE by max daily value 
+    data.table  # Ensure the data table remains a data table
+country_cases.dt</code></pre>
+<pre><code>##     Last_Update Recovered Deaths
+##  1:  2020-01-31         0      0
+##  2:  2020-02-07         0      0
+##  3:  2020-02-21         0      1
+##  4:  2020-02-22         1      2
+##  5:  2020-02-23         2      3
+##  6:  2020-02-24         1      7
+##  7:  2020-02-25         1     10
+##  8:  2020-02-26         3     12
+##  9:  2020-02-27        45     17
+## 10:  2020-02-28        46     21
+## 11:  2020-02-29        46     29
+## 12:  2020-03-01        83     34
+## 13:  2020-03-02       149     52
+## 14:  2020-03-03       160     79
+## 15:  2020-03-04       276    107
+## 16:  2020-03-05       414    148
+## 17:  2020-03-06       523    197
+## 18:  2020-03-07       589    233
+## 19:  2020-03-08       622    366
+## 20:  2020-03-09       724    463
+## 21:  2020-03-10       724    631
+## 22:  2020-03-11      1439   1266
+## 23:  2020-03-14      2335   1809
+## 24:  2020-03-16      2749   2158
+## 25:  2020-03-17      2941   2503
+## 26:  2020-03-18      4025   2978
+## 27:  2020-03-19      4440   3405
+## 28:  2020-03-20      4440   4032
+## 29:  2020-03-21      6072   4825
+## 30:  2020-03-22      7024   5476
+## 31:  2020-03-23      7432   6077
+## 32:  2020-03-24      8326   6820
+## 33:  2020-03-25      9362   7503
+## 34:  2020-03-26     10361   8215
+## 35:  2020-03-27     10950   9134
+## 36:  2020-03-28     12384  10023
+## 37:  2020-03-29     13030  10779
+## 38:  2020-03-30     14620  11591
+## 39:  2020-03-31     15729  12428
+## 40:  2020-04-01     16847  13155
+## 41:  2020-04-02     18278  13915
+## 42:  2020-04-03     19758  14681
+## 43:  2020-04-04     20996  15362
+## 44:  2020-04-05     21815  15887
+## 45:  2020-04-06     22837  16523
+## 46:  2020-04-07     24392  17127
+## 47:  2020-04-08     26491  17669
+## 48:  2020-04-09     28470  18279
+## 49:  2020-04-10     30455  18849
+## 50:  2020-04-11     32534  19468
+## 51:  2020-04-12     34211  19899
+##     Last_Update Recovered Deaths</code></pre>
+<p>Here, we make separate data table for confirmed cases, since they are up to an
+order of magnitude higher than recovered/death reports. Visually it is easier to
+distinguish the plots if they are separated, since if all 3 were on the same plot
+the plots for recovered/deaths would be very small compared to the number of confirmed
+cases. The steps are the same we just did for the previous data.table</p>
+<pre class="r"><code>country_confirmed.dt &lt;- data.dt[data.dt$Country_Region==country.switch,] %&gt;% 
+    group_by(Last_Update) %&gt;% 
+    summarize(Confirmed=max(Confirmed)) %&gt;% 
+    data.table</code></pre>
+</div>
+</div>
+<div id="our-first-plots" class="section level2">
+<h2>Our First Plots</h2>
+<p>Finally, let us plot the data! Here we make use of the <strong>ggplot2</strong> library to
+plot our data. In this first plot, we show the number of reported cases (y-axis)
+over time (x-axis). Again, the plot is showing the maximum number of reported
+cases each day since Jan. 22, 2020 for our country of interest.</p>
+<pre class="r"><code>melted.dt &lt;- melt(country_confirmed.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
+                  value.name=&#39;Number.Reported&#39;)
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported)) +
+    geom_point() + 
+    geom_line()</code></pre>
+<p><img src="/post/data_download_sanitation_files/figure-html/plot-confirmed-1.png" width="672" /></p>
+<p>Here, we show the number of reported deaths and recoveries each day for our country
+of interest. Notice how different are the maximum values in the y-column s between
+this plot and the first one. This is why it was convenient to split them up this way,
+otherwise these two plots would be very small and hard to read!</p>
+<pre class="r"><code>melted.dt &lt;- melt(country_cases.dt, id.vars=&#39;Last_Update&#39;, variable.name = &#39;Cases&#39;, 
+                  value.name=&#39;Number.Reported&#39;)
+ggplot(melted.dt, aes(x=Last_Update, y=Number.Reported, color=Cases)) +
+    geom_point() + 
+    geom_line()</code></pre>
+<p><img src="/post/data_download_sanitation_files/figure-html/plot-cases-1.png" width="672" /></p>
+</div>
+</div>
+<div id="further-reading" class="section level1">
+<h1>Further reading</h1>
+<p>See the following links for information on the following topics:</p>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"><em>Data tables</em></a> in R</p></li>
+<li><p><a href="https://r4ds.had.co.nz/"><em>R for Data Science</em></a>. An excellent resource for those
+who want to delve into other data sets on their own, learning data analysis from
+the ground up in R. Accessible to all levels of experience!</p></li>
+</ul>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
