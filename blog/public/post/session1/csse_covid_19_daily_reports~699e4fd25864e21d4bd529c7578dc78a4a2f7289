@@ -19,8 +19,8 @@
 
 
   <link crossorigin="anonymous" media="all" integrity="sha512-FG+rXqMOivrAjdEQE7tO4BwM1poGmg70hJFTlNSxjX87grtrZ6UnPR8NkzwUHlQEGviu9XuRYeO8zH9YwvZhdg==" rel="stylesheet" href="https://github.githubassets.com/assets/frameworks-146fab5ea30e8afac08dd11013bb4ee0.css" />
-  <link crossorigin="anonymous" media="all" integrity="sha512-iXrV/b4ypc1nr10b3Giikqff+qAx5osQ0yJRxHRDd8mKFefdMtEZ0Sxs1QysJxuJBayOKThjsuMjynwBJQq0aw==" rel="stylesheet" href="https://github.githubassets.com/assets/site-897ad5fdbe32a5cd67af5d1bdc68a292.css" />
-    <link crossorigin="anonymous" media="all" integrity="sha512-vMKRtbQ9h8VmzccMNdmnlBnTLM9zZar8f9BKU3A5UNRZgr3o2+zXRScLx7V1nd9HupewEuevhEx2D3yuqNpkXw==" rel="stylesheet" href="https://github.githubassets.com/assets/github-bcc291b5b43d87c566cdc70c35d9a794.css" />
+  <link crossorigin="anonymous" media="all" integrity="sha512-/AdLBCA+eCrgc3fiUb5+p+bFyPCLqrw0KzL3ZgmaGavn2qE0LVSbYhHMxjTRaATkscS7ertVyGYNyRiTvt5d7g==" rel="stylesheet" href="https://github.githubassets.com/assets/site-fc074b04203e782ae07377e251be7ea7.css" />
+    <link crossorigin="anonymous" media="all" integrity="sha512-KbB4y5unNzDOOHlrNh7nGziPvcXtv0seLXOC5S4Mw0EqTtXhxqmDCEvb/ZV9T1m9sth14CbzrxLoBD9/VEMuNA==" rel="stylesheet" href="https://github.githubassets.com/assets/github-29b078cb9ba73730ce38796b361ee71b.css" />
     
     
     
@@ -42,7 +42,7 @@
   
   
 
-  <meta name="request-id" content="FDAE:29C0:8DC86A:BF4CEF:5E949C1D" data-pjax-transient="true"/><meta name="html-safe-nonce" content="d955e6409e30a001da9631e3867c8277a53462d7" data-pjax-transient="true"/><meta name="visitor-payload" content="eyJyZWZlcnJlciI6IiIsInJlcXVlc3RfaWQiOiJGREFFOjI5QzA6OERDODZBOkJGNENFRjo1RTk0OUMxRCIsInZpc2l0b3JfaWQiOiI3MjYzMzQ3MjQ2MDA3MzYwNTQxIiwicmVnaW9uX2VkZ2UiOiJzZWEiLCJyZWdpb25fcmVuZGVyIjoic2VhIn0=" data-pjax-transient="true"/><meta name="visitor-hmac" content="efd31fa4b86867f671711858d65036153bc125e1568e99b4323f54a31af94958" data-pjax-transient="true"/>
+  <meta name="request-id" content="E6AD:88F0:62860:84B64:5EA727A6" data-pjax-transient="true"/><meta name="html-safe-nonce" content="51dd3c8d65906dc170bd30b61ca3343716116fd5" data-pjax-transient="true"/><meta name="visitor-payload" content="eyJyZWZlcnJlciI6IiIsInJlcXVlc3RfaWQiOiJFNkFEOjg4RjA6NjI4NjA6ODRCNjQ6NUVBNzI3QTYiLCJ2aXNpdG9yX2lkIjoiMTAwNTIxNTI5MzA3NTA2NTk4IiwicmVnaW9uX2VkZ2UiOiJzZWEiLCJyZWdpb25fcmVuZGVyIjoic2VhIn0=" data-pjax-transient="true"/><meta name="visitor-hmac" content="e2608b3de3d847adec489715abc906f74f6e7014cc1b0610024a4a9c4807edef" data-pjax-transient="true"/>
 
 
 
@@ -76,9 +76,9 @@
       <meta name="expected-hostname" content="github.com">
 
 
-    <meta name="enabled-features" content="MARKETPLACE_SOCIAL_PROOF_CUSTOMERS,MARKETPLACE_TRENDING_SOCIAL_PROOF,MARKETPLACE_RECOMMENDATIONS,MARKETPLACE_PENDING_INSTALLATIONS,RELATED_ISSUES">
+    <meta name="enabled-features" content="MARKETPLACE_SOCIAL_PROOF_CUSTOMERS,MARKETPLACE_TRENDING_SOCIAL_PROOF,MARKETPLACE_RECOMMENDATIONS,MARKETPLACE_PENDING_INSTALLATIONS">
 
-  <meta http-equiv="x-pjax-version" content="17bc53639b6593968397760e36d80b86">
+  <meta http-equiv="x-pjax-version" content="a84db54213e8cd5f57183b8347279532">
   
 
       <link href="https://github.com/CSSEGISandData/COVID-19/commits/master.atom" rel="alternate" title="Recent Commits to COVID-19:master" type="application/atom+xml">
@@ -165,6 +165,9 @@
                   </div>
                 </details>
               </li>
+                <li class=" mr-3 mr-lg-3">
+                  <a href="/team" class="HeaderMenu-link no-underline py-3 d-block d-lg-inline-block" data-ga-click="(Logged out) Header, go to Team">Team</a>
+                </li>
               <li class=" mr-3 mr-lg-3">
                 <a href="/enterprise" class="HeaderMenu-link no-underline py-3 d-block d-lg-inline-block" data-ga-click="(Logged out) Header, go to Enterprise">Enterprise</a>
               </li>
@@ -261,7 +264,7 @@
           spellcheck="false"
           autocomplete="off"
           >
-          <input type="hidden" data-csrf="true" class="js-data-jump-to-suggestions-path-csrf" value="TYS/FS580tP3k5SPfjp41MS/ygQz6S4+oLJNxq5Xy6hIIFuIrmQAud28uzDkex87hwAUwDSMm8cREa6HItwiQg==" />
+          <input type="hidden" data-csrf="true" class="js-data-jump-to-suggestions-path-csrf" value="d7a4JQttLIgOG2islTg4OQRO/PK5ei2uT0s75FLNkYB+W7khIa4g9AF8iWEIOPTUaFeFsr0xrcUtn7lipP6oPg==" />
           <input type="hidden" class="js-site-search-type-field" name="type" >
             <img src="https://github.githubassets.com/images/search-key-slash.svg" alt="" class="mr-2 header-search-key-slash">
 
@@ -405,6 +408,8 @@
   <div id="start-of-content" class="show-on-focus"></div>
 
 
+
+
     <div id="js-flash-container">
 
 
@@ -452,8 +457,10 @@
 
       <div class="flex-auto min-width-0 width-fit mr-3">
         <h1 class="public  d-flex flex-wrap flex-items-center break-word float-none ">
-    <svg class="octicon octicon-repo" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
-  <span class="author ml-1 flex-self-stretch" itemprop="author">
+  <span class="flex-self-stretch" style="margin-top: -2px;">
+      <svg class="octicon octicon-repo" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
+  </span>
+  <span class="author ml-2 flex-self-stretch" itemprop="author">
     <a class="url fn" rel="author" data-hovercard-type="user" data-hovercard-url="/users/CSSEGISandData/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/CSSEGISandData">CSSEGISandData</a>
   </span>
   <span class="path-divider flex-self-stretch">/</span>
@@ -477,8 +484,8 @@
     <svg class="octicon octicon-eye v-align-text-bottom" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
     Watch
 </a>    <a class="social-count" href="/CSSEGISandData/COVID-19/watchers"
-       aria-label="930 users are watching this repository">
-      930
+       aria-label="928 users are watching this repository">
+      928
     </a>
 
   </li>
@@ -490,8 +497,8 @@
       Star
 </a>
     <a class="social-count js-social-count" href="/CSSEGISandData/COVID-19/stargazers"
-      aria-label="20322 users starred this repository">
-      20.3k
+      aria-label="21369 users starred this repository">
+      21.4k
     </a>
 
   </li>
@@ -502,8 +509,8 @@
         Fork
 </a>
     <a href="/CSSEGISandData/COVID-19/network/members" class="social-count"
-       aria-label="11049 users forked this repository">
-      11k
+       aria-label="12164 users forked this repository">
+      12.2k
     </a>
   </li>
 </ul>
@@ -527,7 +534,7 @@
       <a itemprop="url" data-hotkey="g i" class="js-selected-navigation-item reponav-item" data-selected-links="repo_issues repo_labels repo_milestones /CSSEGISandData/COVID-19/issues" href="/CSSEGISandData/COVID-19/issues">
         <div class="d-inline"><svg class="octicon octicon-issue-opened" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 011.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></div>
         <span itemprop="name">Issues</span>
-        <span class="Counter">1,156</span>
+        <span class="Counter">1,270</span>
         <meta itemprop="position" content="2">
 </a>    </span>
 
@@ -535,7 +542,7 @@
     <a data-hotkey="g p" data-skip-pjax="true" itemprop="url" class="js-selected-navigation-item reponav-item" data-selected-links="repo_pulls checks /CSSEGISandData/COVID-19/pulls" href="/CSSEGISandData/COVID-19/pulls">
       <div class="d-inline"><svg class="octicon octicon-git-pull-request" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0010 15a1.993 1.993 0 001-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 00-1 3.72v6.56A1.993 1.993 0 002 15a1.993 1.993 0 001-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg></div>
       <span itemprop="name">Pull requests</span>
-      <span class="Counter">225</span>
+      <span class="Counter">244</span>
       <meta itemprop="position" content="4">
 </a>  </span>
 
@@ -556,6 +563,7 @@
     <a data-skip-pjax="true" class="js-selected-navigation-item reponav-item" data-selected-links="security overview alerts policy token_scanning code_scanning /CSSEGISandData/COVID-19/security" href="/CSSEGISandData/COVID-19/security">
       <div class="d-inline"><svg class="octicon octicon-shield" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M0 2l7-2 7 2v6.02C14 12.69 8.69 16 7 16c-1.69 0-7-3.31-7-7.98V2zm1 .75L7 1l6 1.75v5.268C13 12.104 8.449 15 7 15c-1.449 0-6-2.896-6-6.982V2.75zm1 .75L7 2v12c-1.207 0-5-2.482-5-5.985V3.5z"></path></svg></div>
       Security
+          <span class="Counter js-security-tab-count" data-url="/CSSEGISandData/COVID-19/security/overall-count" hidden></span>
 </a>
     <a class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors dependency_graph dependabot_updates pulse people /CSSEGISandData/COVID-19/pulse" href="/CSSEGISandData/COVID-19/pulse">
       <div class="d-inline"><svg class="octicon octicon-graph" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"></path></svg></div>
@@ -623,8 +631,8 @@
     
 <div class="AvatarStack flex-self-start ">
   <div class="AvatarStack-body" aria-label="CSSEGISandData">
-        <a class="avatar" data-skip-pjax="true" data-hovercard-type="user" data-hovercard-url="/users/CSSEGISandData/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/CSSEGISandData">
-          <img height="20" width="20" alt="@CSSEGISandData" src="https://avatars1.githubusercontent.com/u/60674295?s=60&amp;u=cda3e09cda856b17dbc71dbd50b87f75955e7e48&amp;v=4" class="" />
+        <a class="avatar avatar-user" data-skip-pjax="true" data-hovercard-type="user" data-hovercard-url="/users/CSSEGISandData/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/CSSEGISandData">
+          <img height="20" width="20" alt="@CSSEGISandData" src="https://avatars1.githubusercontent.com/u/60674295?s=60&amp;u=cda3e09cda856b17dbc71dbd50b87f75955e7e48&amp;v=4" class=" avatar-user" />
 </a>  </div>
 </div>
 
@@ -638,18 +646,22 @@
   
 
 
-        <a data-pjax="true" title="Update 03-24-2020.csv" class="message text-inherit" href="/CSSEGISandData/COVID-19/commit/3489fad9f9d830c3adbbb3772ac74ced1d2f336f">Update 03-24-2020.csv</a>
+        <a data-pjax="true" title="automated update" class="message text-inherit" href="/CSSEGISandData/COVID-19/commit/e5c19e4a56768bdef3b7d7c31555bfb45d595dda">automated update</a>
 
     </div>
+      <a class="no-wrap muted-link text-inherit commit-tease-comments" href="/CSSEGISandData/COVID-19/commit/e5c19e4a56768bdef3b7d7c31555bfb45d595dda" anchor="comments" data-pjax>
+        <svg class="octicon octicon-comment" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 1H2c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h2v3.5L7.5 11H14c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zm0 9H7l-2 2v-2H2V2h12v8z"></path></svg>
+        1
+      </a>
     <div class="no-wrap d-flex flex-self-start flex-items-baseline">
         <span class="mr-2 flex-self-center">
-          <include-fragment accept="text/fragment+html" src="/CSSEGISandData/COVID-19/commit/3489fad9f9d830c3adbbb3772ac74ced1d2f336f/rollup?direction=w" class="d-inline"></include-fragment>
+          <include-fragment accept="text/fragment+html" src="/CSSEGISandData/COVID-19/commit/e5c19e4a56768bdef3b7d7c31555bfb45d595dda/rollup?direction=w" class="d-inline"></include-fragment>
         </span>
       <span class="mr-1">Latest commit</span>
-      <a class="commit-tease-sha mr-1" href="/CSSEGISandData/COVID-19/commit/3489fad9f9d830c3adbbb3772ac74ced1d2f336f" data-pjax>
-        3489fad
+      <a class="commit-tease-sha mr-1" href="/CSSEGISandData/COVID-19/commit/e5c19e4a56768bdef3b7d7c31555bfb45d595dda" data-pjax>
+        e5c19e4
       </a>
-      <span itemprop="dateModified"><relative-time datetime="2020-04-13T04:45:27Z" class="no-wrap">Apr 13, 2020</relative-time></span>
+      <span itemprop="dateModified"><relative-time datetime="2020-04-27T02:50:01Z" class="no-wrap">Apr 27, 2020</relative-time></span>
     </div>
     </div>
   </div>
@@ -657,7 +669,7 @@
   
 
 
-    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/CSSEGISandData/COVID-19/tree/b8eb4f7f54cfa29f0ab10843deab5f39d7c5db17/csse_covid_19_data/csse_covid_19_daily_reports">Permalink</a>
+    <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/CSSEGISandData/COVID-19/tree/b29f336fdced9e4b29a257c44632e0e804ba8c87/csse_covid_19_data/csse_covid_19_daily_reports">Permalink</a>
 
     <table class="files js-navigation-container js-active-navigation-container " data-pjax>
       <thead>
@@ -1742,15 +1754,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="03-23-2020.csv" id="c121329ae60a31967618f48e16831b26-89dea7ae4f1901342ce1a76613e4790d702236b1" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/03-23-2020.csv">03-23-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="03-23-2020.csv" id="c121329ae60a31967618f48e16831b26-e8b3bd17746131f68a533975e2b7cedb9a066a71" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/03-23-2020.csv">03-23-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/e748b6d8a55e4a88371af56b129ababe1712522d">update</a>
+                    <a data-pjax="true" title="updated past data" class="link-gray" href="/CSSEGISandData/COVID-19/commit/93f4ccb579d7ce0323c5ad34084981f891951c0e">updated past data</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-03-24T00:22:54Z" class="no-wrap">Mar 24, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-16T16:38:13Z" class="no-wrap">Apr 16, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -1759,15 +1771,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="03-24-2020.csv" id="0491bb42b7227a62e96507cec1a10972-715f41e87c3d4be3cc972cc19073a1f75a9b2acb" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/03-24-2020.csv">03-24-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="03-24-2020.csv" id="0491bb42b7227a62e96507cec1a10972-f29aa8553184c3a4c3fd61059c3815cb16a4430c" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/03-24-2020.csv">03-24-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="Update 03-24-2020.csv" class="link-gray" href="/CSSEGISandData/COVID-19/commit/3489fad9f9d830c3adbbb3772ac74ced1d2f336f">Update 03-24-2020.csv</a>
+                    <a data-pjax="true" title="updated past data" class="link-gray" href="/CSSEGISandData/COVID-19/commit/93f4ccb579d7ce0323c5ad34084981f891951c0e">updated past data</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-13T04:45:27Z" class="no-wrap">Apr 13, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-16T16:38:13Z" class="no-wrap">Apr 16, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -1895,15 +1907,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-01-2020.csv" id="fc641531f8305bef113a4c9a576cc2c2-26405db69219c2ac97a3427cbde1156bcf241a76" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-01-2020.csv">04-01-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-01-2020.csv" id="fc641531f8305bef113a4c9a576cc2c2-eb0e137d2a2bbc905a91787a2e609e55ea2013bf" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-01-2020.csv">04-01-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="Correction for Hainan, China" class="link-gray" href="/CSSEGISandData/COVID-19/commit/f26a6339a7789936a60968edcc33f3cd94953ed7">Correction for Hainan, China</a>
+                    <a data-pjax="true" title="updated data" class="link-gray" href="/CSSEGISandData/COVID-19/commit/30ce7eb4b0a6a37b274f12cda350554b95609baa">updated data</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-13T04:30:35Z" class="no-wrap">Apr 13, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-16T16:09:49Z" class="no-wrap">Apr 16, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -1929,15 +1941,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-03-2020.csv" id="03327647bfce059602341c18a16fc6ee-c02ebdc5c44b6fde4d432409ab329e62eadc809f" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-03-2020.csv">04-03-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-03-2020.csv" id="03327647bfce059602341c18a16fc6ee-e09c72ba6fd37525dca8ffe6d939ffd3386a615b" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-03-2020.csv">04-03-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/d3cfe941cc0d1ea27d6aa702ca3103ce2ac26993">automated update</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-03T23:50:01Z" class="no-wrap">Apr 3, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -1946,15 +1958,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-04-2020.csv" id="978c622c8fbeed09deda3b6e03705a74-231763c69ea0bb6eb025b97212461c83e30b7d1f" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-04-2020.csv">04-04-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-04-2020.csv" id="978c622c8fbeed09deda3b6e03705a74-e50a6345577023d7360752a749f6af59f31d334e" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-04-2020.csv">04-04-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="adjust incorrect data" class="link-gray" href="/CSSEGISandData/COVID-19/commit/53324cb417b5037ee7146a758ebf880ff47d4d56">adjust incorrect data</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-09T17:31:34Z" class="no-wrap">Apr 9, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -1963,15 +1975,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-05-2020.csv" id="b26162680748815aceb07b00f9d05ffe-8b13620064533d90547860f14bfc352ce86d637b" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-05-2020.csv">04-05-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-05-2020.csv" id="b26162680748815aceb07b00f9d05ffe-802500f4753b0fdfaf1f7ca882827fd187322173" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-05-2020.csv">04-05-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/7f562f31c475c4143d8dc3c4f1aefa35afc829e0">automated update</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-05T23:50:02Z" class="no-wrap">Apr 5, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -1980,15 +1992,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-06-2020.csv" id="2e942d83a72e8712ca0677e0633bf49c-9d7e0b91e5d79279f9cab1f80ea5305d1960f4c9" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-06-2020.csv">04-06-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-06-2020.csv" id="2e942d83a72e8712ca0677e0633bf49c-797a60f4b349234153074b12c43ec7f7c1047de9" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-06-2020.csv">04-06-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="adjust fairbanks alaska" class="link-gray" href="/CSSEGISandData/COVID-19/commit/391a84063f4fe89b38490cfbd416a52e6fd08866">adjust fairbanks alaska</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-07T20:57:58Z" class="no-wrap">Apr 7, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -1997,15 +2009,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-07-2020.csv" id="3b075ee34b4af1411b9a089b48dd0190-7c88b29e8d7b20bd0e71d2b4e220c401d6fa0c13" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-07-2020.csv">04-07-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-07-2020.csv" id="3b075ee34b4af1411b9a089b48dd0190-a752683d5aedea91b135519265c2d41060785c20" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-07-2020.csv">04-07-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/c7cea9d5f44f0460d62f55703b234b7d2afdefc1">automated update</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-07T23:50:01Z" class="no-wrap">Apr 7, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -2014,15 +2026,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-08-2020.csv" id="9a43091ace12caf0d01233f77239acb6-16aebaf264fa7f22df27d096aab8f565151500dc" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-08-2020.csv">04-08-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-08-2020.csv" id="9a43091ace12caf0d01233f77239acb6-c162033a23aa4eec1bfb91faadb7df8d090e4bd9" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-08-2020.csv">04-08-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/80b03e48d2cd3bdcd83b722548f9a93d59f5cdbf">automated update</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-08T23:50:01Z" class="no-wrap">Apr 8, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -2031,15 +2043,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-09-2020.csv" id="00502b60b12b795b578eee1be03358a1-dba7cd8947af339f2918b630b10c2245c6a39134" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-09-2020.csv">04-09-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-09-2020.csv" id="00502b60b12b795b578eee1be03358a1-69091a31bffadd9e0750fb6c6799bbac454dc68c" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-09-2020.csv">04-09-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/ae5e8eacbcbf0ff9f3d1bd1b0fe0b25f3fab6e41">automated update</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-09T23:50:01Z" class="no-wrap">Apr 9, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -2048,15 +2060,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-10-2020.csv" id="e68ca8a97c84482c7b7a6487deaa1f41-2bd622db4cb4ecab94eae3f06ea05a636881cda3" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-10-2020.csv">04-10-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-10-2020.csv" id="e68ca8a97c84482c7b7a6487deaa1f41-c96fd678a3dfbd926a2f8fb6dd821898bf0053ca" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-10-2020.csv">04-10-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/a582ad61067bfb7a9e9582edb741f0ee6b3f5d5a">automated update</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-10T23:50:01Z" class="no-wrap">Apr 10, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -2065,15 +2077,15 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-11-2020.csv" id="df274222793810f3c432816a6ec96209-dff0efa42c5e04af0023bcd17ccec4085e363739" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-11-2020.csv">04-11-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-11-2020.csv" id="df274222793810f3c432816a6ec96209-537e446faf85fb4432b983b6889a9f597accb806" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-11-2020.csv">04-11-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/b7d22e1fb47ef0f93212e124c616defddc8e6e91">automated update</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-11T23:50:01Z" class="no-wrap">Apr 11, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -2082,15 +2094,257 @@
               <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
             </td>
             <td class="content">
-              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-12-2020.csv" id="33c6822998891af159c0e3ca1c9bf2fa-5ef91dd92ac6d598d6feb49b191ae5edc46969ed" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-12-2020.csv">04-12-2020.csv</a></span>
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-12-2020.csv" id="33c6822998891af159c0e3ca1c9bf2fa-4cae9776476b5bc13e94e0027cfb87b254ff6304" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-12-2020.csv">04-12-2020.csv</a></span>
             </td>
             <td class="message">
               <span class="css-truncate css-truncate-target">
-                    <a data-pjax="true" title="Corrected Date Format" class="link-gray" href="/CSSEGISandData/COVID-19/commit/6dd9cf6cc66d87a75c4f8c3754f4425f6f52c2c3">Corrected Date Format</a>
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
               </span>
             </td>
             <td class="age">
-              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-13T03:30:49Z" class="no-wrap">Apr 13, 2020</time-ago></span>
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-13-2020.csv" id="0a8e25d29e7616fa4037ace84d48cb5b-3b917ab9f0502b85a8a014f29efedc3220c2a195" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-13-2020.csv">04-13-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-14-2020.csv" id="6c33b2b74a17ebc749e643d8c3fdd2c2-85343eb43d595ecfe5f455c49fe38117dee4ea32" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-14-2020.csv">04-14-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-15-2020.csv" id="a9d8a8d4b65bb1fcc92d9fcb4dfff21a-5455d87ee383501176d452bfa0d80390a18353de" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-15-2020.csv">04-15-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-16-2020.csv" id="aff80f85fe869612e686daa5f88e9250-7a258c21ade74ade7fc73240fdb002cd8f3886ff" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-16-2020.csv">04-16-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4c0b4afb051c8002d8ebb01ccd5fbbf82e09ccb9">update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T18:18:52Z" class="no-wrap">Apr 17, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-17-2020.csv" id="3ad46ac27d461c36dac2849c7137efc7-e2d365d0621a7c39e277e938e83c6ccb1ccd257f" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-17-2020.csv">04-17-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4d26a7d185d4efbd9b8c30e3021c518a0ac26187">automated update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-17T23:50:02Z" class="no-wrap">Apr 17, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-18-2020.csv" id="8df1fdf73d5f9f3888b1689b99b46ec3-a679e4f7e11119c69a3e9fa9f5d32ec93a95936a" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-18-2020.csv">04-18-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/35102f1ecd5e06fcac1bf7a6f8349e462bb594d7">update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-20T01:03:58Z" class="no-wrap">Apr 20, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-19-2020.csv" id="a3e40fa08419afb6c22feab9cadd3b49-0f676e9311aeeb92f1b14f4ee30a0f1e8c28e918" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-19-2020.csv">04-19-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/35102f1ecd5e06fcac1bf7a6f8349e462bb594d7">update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-20T01:03:58Z" class="no-wrap">Apr 20, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-20-2020.csv" id="da183a46c1870125a220d82b239d1951-a7c4ba213cb5b838bf059fc86d757b4a3fd78c46" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-20-2020.csv">04-20-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/09caeeae8e0f81f091733dd8334e2b25a7e3a529">automated update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-20T23:50:01Z" class="no-wrap">Apr 20, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-21-2020.csv" id="6a64d8a8b6df4fee542db11686e94f40-e673b6132c3d9fc49e2d017c7420a6ba256ae099" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-21-2020.csv">04-21-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="Correct Benton and Franklin, WA
+
+Correct Benton and Franklin, WA to match the WA DOH report." class="link-gray" href="/CSSEGISandData/COVID-19/commit/2178f31f338b06af8edfd686ca1979bfca78ff15">Correct Benton and Franklin, WA</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-24T14:24:27Z" class="no-wrap">Apr 24, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-22-2020.csv" id="10feda4e03bec7f50e44dbf6167a0138-40b28df9c74617f2cdb3a9cd3cc81c523be52c10" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-22-2020.csv">04-22-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="Add Benton and Franklin, WA
+
+Benton and Franklin, WA were missing in this report." class="link-gray" href="/CSSEGISandData/COVID-19/commit/30d71cf0cf6e629b3fa419a3ce351509ed6b05c2">Add Benton and Franklin, WA</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-24T14:21:30Z" class="no-wrap">Apr 24, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-23-2020.csv" id="f29a87171ab782122a53d51158b84f9a-e5e869cf216f0e4f7d779669cf727f72cdf69760" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-23-2020.csv">04-23-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/c089a7df4d4e66cdc2e547e8c1785df8f90ef3c6">automated update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-24T03:50:02Z" class="no-wrap">Apr 24, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-24-2020.csv" id="bd90e02a88c3ac8647c2653029aa3097-54509bb02c07d2adcc950f75cecbd547f17c0dbf" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-24-2020.csv">04-24-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="adjust Ukraine" class="link-gray" href="/CSSEGISandData/COVID-19/commit/ad3d79726d03df91c1ce54c5a642a018ab0c3672">adjust Ukraine</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-26T03:08:47Z" class="no-wrap">Apr 26, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-25-2020.csv" id="4bfc217f28ab83c61f5da143fcb5211c-49e546e73570065a3afd3b0ac4de422043726b99" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-25-2020.csv">04-25-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/4e4b8963d9a5715239941748b2258c6db6c64104">automated update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-26T02:50:01Z" class="no-wrap">Apr 26, 2020</time-ago></span>
+            </td>
+          </tr>
+          <tr class="js-navigation-item">
+            <td class="icon">
+              <svg aria-label="file" class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" role="img"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
+              <img width="16" height="16" class="spinner" alt="" src="https://github.githubassets.com/images/spinners/octocat-spinner-32.gif" />
+            </td>
+            <td class="content">
+              <span class="css-truncate css-truncate-target"><a class="js-navigation-open " title="04-26-2020.csv" id="8e74a0d1a23aaeb7d9600a19f0c5fefb-5c3a8a84fb6699c3f0331303535b4f01ef161731" href="/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/04-26-2020.csv">04-26-2020.csv</a></span>
+            </td>
+            <td class="message">
+              <span class="css-truncate css-truncate-target">
+                    <a data-pjax="true" title="automated update" class="link-gray" href="/CSSEGISandData/COVID-19/commit/e5c19e4a56768bdef3b7d7c31555bfb45d595dda">automated update</a>
+              </span>
+            </td>
+            <td class="age">
+              <span class="css-truncate css-truncate-target"><time-ago datetime="2020-04-27T02:50:01Z" class="no-wrap">Apr 27, 2020</time-ago></span>
             </td>
           </tr>
           <tr class="js-navigation-item">
@@ -2173,11 +2427,11 @@
 
 
     <script crossorigin="anonymous" async="async" integrity="sha512-WcQmT2vhcClFVOaaAJV/M+HqsJ2Gq/myvl6F3gCVBxykazXTs+i5fvxncSXwyG1CSfcrqmLFw/R/bmFYzprX2A==" type="application/javascript" id="js-conditional-compat" data-src="https://github.githubassets.com/assets/compat-bootstrap-59c4264f.js"></script>
-    <script crossorigin="anonymous" integrity="sha512-qRIR9sJtW+F0sy3P1EuUI81C+jzXTa54zUOyTmKhz64cc/Wj2XT1nnh23ZjWj1CFf8tO9LOn49s79ilOILcGkA==" type="application/javascript" src="https://github.githubassets.com/assets/environment-bootstrap-a91211f6.js"></script>
-      <script crossorigin="anonymous" async="async" integrity="sha512-qUt0W3Q++EcTV/FjWCH4pkCuFrwLmBaxXaem85oHWp5D40Jb6WozJdUpeKQgU3fguUZ7cqxD1gpjU6f4u3ScKg==" type="application/javascript" src="https://github.githubassets.com/assets/vendor-a94b745b.js"></script>
-      <script crossorigin="anonymous" async="async" integrity="sha512-rgIRUbqgpAtwFR6lNuW9DuiSVk+gbHzQ/lEcAp6761XMCTO1v6u6kMjlhnn+mW3zSTzwUBO9hkMvfgeNhPiSwA==" type="application/javascript" src="https://github.githubassets.com/assets/frameworks-ae021151.js"></script>
+    <script crossorigin="anonymous" integrity="sha512-CcHu7jzfxvBELN006wvfUN0tIOU83OJNyclvF0p+gQll1M1DjIioWsRbGZMgDL3zruW1D7dRxdbJqXM6P57PbA==" type="application/javascript" src="https://github.githubassets.com/assets/environment-bootstrap-09c1eeee.js"></script>
+      <script crossorigin="anonymous" async="async" integrity="sha512-JfA9c00QqdFAVbQaARMl2BJ+QwABPJ247GKHsBbdm7xq2P00Z6cmwPG7cFFXV0SVHPlKz8EqPiJeZDOZZTRFww==" type="application/javascript" src="https://github.githubassets.com/assets/vendor-25f03d73.js"></script>
+      <script crossorigin="anonymous" async="async" integrity="sha512-hVpTe9MWi0KxmdE+PeGMRULB/ZQCYlVVpDF3X0UoPkr7/gcWEq6Xjxh1ApYpIU09cVCnqXpTvoFsBiZ+iMZhlQ==" type="application/javascript" src="https://github.githubassets.com/assets/frameworks-855a537b.js"></script>
     
-    <script crossorigin="anonymous" async="async" integrity="sha512-uhFW7jBCe4MB/BelZxBqEbkA802lS//XeCrBsrl19aKSdq57weX85DETrTgMTEqhVIzlYNuYYnuKsXcQhhK6EQ==" type="application/javascript" src="https://github.githubassets.com/assets/github-bootstrap-ba1156ee.js"></script>
+    <script crossorigin="anonymous" async="async" integrity="sha512-yoDL61Y2F44Mh3Zr3dr8AUIrP2kpe0u5fPDDmMp5KmKO0KNBfFdh3kmXjENx0PCojPNJ3DSqNzaPd8r52ki9PQ==" type="application/javascript" src="https://github.githubassets.com/assets/github-bootstrap-ca80cbeb.js"></script>
     
     
     
@@ -2204,7 +2458,6 @@
   </div>
 </div>
 
-  <div aria-live="polite" class="js-global-screen-reader-notice sr-only"></div>
 
   </body>
 </html>
