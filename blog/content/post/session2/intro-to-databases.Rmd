@@ -1,0 +1,44 @@
+---
+title: "An Introduction to Databases"
+author: "Zach"
+date: "2020-04-13"
+output: html_document
+---
+    
+    
+```{r include=FALSE}
+knitr::opts_chunk$set(message=FALSE)
+```
+
+## Databases - Storing and Managing Data
+This week as part of the series, Kyle introduced us to some basic database management
+by moving the csv data that we dowloaded from the [*JHU CSSE database*](https://github.com/CSSEGISandData/COVID-19) to a local Postgres instance on his machine and demoing some simple commands.
+
+
+### Some basic commands
+Here is a table of some basic SQL commands:
+```{r echo=FALSE}
+library(data.table)
+library(knitr)
+library(magrittr)
+defs.list <- list('Fetch data from the database (i.e. query the database)',
+                  'Edit existing rows in a table',
+                  'Add new rows to a table',
+                  'Delete rows from a table'
+)
+
+defs.dt <- data.table('Command'=list('SELECT','UPDATE','INSERT','DELETE'),
+                      'Definition'=defs.list)
+kable(defs.dt)
+```
+
+
+    
+
+## Further reading
+See the following links for information on the following topics:
+
+* [*Codecademy article on databases*](https://www.codecademy.com/articles/what-is-rdbms-sql).
+Codecademy is also a great place for you to get started with a number of programming languages
+on your own with simple introductory lessons for FREE.
+
